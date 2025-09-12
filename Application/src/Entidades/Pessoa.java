@@ -1,3 +1,4 @@
+package Entidades;
 public class Pessoa {
     private String nome;
     private int idade;
@@ -30,5 +31,12 @@ public class Pessoa {
     }
     public String getTelefone(){
         return this.telefone;
+    }
+    public void printInformacoes(){
+        System.out.println("----------------------");
+        System.out.println("nome:"+ this.nome);
+        System.out.println("idade:"+ this.idade);
+        System.out.println("telefone:"+ this.telefone);
+        System.out.println("----------------------");
     }
 }
