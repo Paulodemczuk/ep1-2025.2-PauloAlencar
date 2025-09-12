@@ -12,7 +12,12 @@ public class Paciente extends Pessoa {
         super(nome, idade, telefone);
         this.cpf = cpf;
     }
-    
+    public void setCpf(String cpf){
+        this.cpf = cpf;    
+    }
+    public String getCpf(){
+        return this.cpf;
+    }
     
     @Override
     public void printInformacoes(){
