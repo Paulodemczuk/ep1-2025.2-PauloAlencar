@@ -10,6 +10,14 @@ public class App {
         Scanner sc = new Scanner(System.in);
         int menu = sc.nextInt();
         sc.close();
+        switch (menu){
+            case 1: 
+                System.out.println("menu paciente");
+                break;
+            case 2: 
+                System.out.println("menu medico");
+                break;
+        }
         System.out.println("O menu escolhido foi: "+ menu);
     }
 }
