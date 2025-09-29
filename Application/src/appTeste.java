@@ -1,4 +1,5 @@
 import Entidades.*;
+import Menus.MenuPaciente;
 public class appTeste {
     public static void main(String[] args) {
         Paciente machucado = new Paciente();
@@ -11,5 +12,6 @@ public class appTeste {
         med1.setCrm("21345 SP");
         med1.setEspecialidade("Cardiologista");
         med1.printInformacoes();
+        MenuPaciente.exibirMenuPaciente();
     }
 }
