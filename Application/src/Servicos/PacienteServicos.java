@@ -40,4 +40,18 @@ public class PacienteServicos {
         }
         return retorno;
     }
+
+    public boolean excluirPaciente(String cpf){
+        boolean removeu = cpfCadastrado(cpf);
+        if(removeu){
+            for(Paciente paciente : pacientes){
+                if(paciente.getCpf().equals(cpf)){
+                    this.pacientes.remove(paciente);
+                    removeu = true;
+                    break;
+                }   
+            }
+        }
+        return removeu;
+    }
 }
