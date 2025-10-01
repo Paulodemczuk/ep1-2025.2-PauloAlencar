@@ -8,6 +8,7 @@ public class Consulta {
     private String local;
     private int status;
     private LocalDateTime dataHora;
+    private String diagnostico;
 
     public Consulta(){
         this.paciente = new Paciente();
@@ -67,5 +68,13 @@ public class Consulta {
     }
     public LocalDateTime getDataHora(){
         return this.dataHora;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
     }
 }
