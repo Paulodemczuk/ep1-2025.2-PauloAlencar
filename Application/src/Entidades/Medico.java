@@ -36,6 +36,22 @@ public class Medico extends Pessoa{
         this.especialidade = especialidade;
         this.crm = crm;
         this.custoConsulta = custoConsulta;
+        this.agenda = new ArrayList<>(); 
+        ArrayList<String> diasSemana = new ArrayList<>();
+        diasSemana.add("Segunda"); // Sempre 0
+        diasSemana.add("Terça");// Sempre 1
+        diasSemana.add("Quarta");// Sempre 2
+        diasSemana.add("Quinta");// Sempre 3
+        diasSemana.add("Sexta");// Sempre 4
+        diasSemana.add("Sabado");// Sempre 5
+        diasSemana.add("Domingo");// Sempre 6
+        
+        for (int i= 0; i<diasSemana.size();i++){
+            String aux = diasSemana.get(i);
+            ArrayList<String> colunaDia = new ArrayList<>();
+            colunaDia.add(aux);
+            this.agenda.add(colunaDia);
+        }
     }
 
     public String getEspecialidade(){
