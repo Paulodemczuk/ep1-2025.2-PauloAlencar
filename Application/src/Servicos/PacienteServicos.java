@@ -12,9 +12,9 @@ public class PacienteServicos {
 
     public boolean cadastrarPaciente(String nome, int idade, String telefone, String cpf){
         boolean cadastrou = cpfCadastrado(cpf);
-        if(cadastrou){
+        if(!cadastrou){
             Paciente novoPaciente = new Paciente(nome, idade, telefone, cpf);
-            pacientes.add(novoPaciente);
+            this.pacientes.add(novoPaciente);
             cadastrou = true;
         }
         return cadastrou;
@@ -27,9 +27,17 @@ public class PacienteServicos {
                 existe = true;
                 break;
             }
-        
         }
         return existe;
     }
-    
+
+    public Paciente getPaciente(String cpf){
+        Paciente retorno = new Paciente();
+        for(Paciente paciente: pacientes){
+            if(paciente.getCpf().equals(cpf)){
+                retorno = paciente;
+            }
+        }
+        return retorno;
+    }
 }
