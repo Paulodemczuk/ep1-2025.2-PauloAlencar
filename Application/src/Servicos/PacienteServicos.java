@@ -44,14 +44,25 @@ public class PacienteServicos {
     public boolean excluirPaciente(String cpf){
         boolean removeu = cpfCadastrado(cpf);
         if(removeu){
-            for(Paciente paciente : pacientes){
-                if(paciente.getCpf().equals(cpf)){
-                    this.pacientes.remove(paciente);
-                    removeu = true;
-                    break;
-                }   
-            }
+            this.pacientes.remove(getPaciente(cpf));
+            removeu = true;              
         }
         return removeu;
+    }
+
+    public boolean editarPaciente(String cpf, String novoNome){
+        boolean editou = cpfCadastrado(cpf);
+        if(editou){
+            getPaciente(cpf).setNome(novoNome);
+        }
+        return editou;
+    }
+
+    public boolean editarPaciente(String cpf, int novaIdade){
+        boolean editou = cpfCadastrado(cpf);
+        if(editou){
+            getPaciente(cpf).setIdade(novaIdade);
+        }
+        return editou;
     }
 }
