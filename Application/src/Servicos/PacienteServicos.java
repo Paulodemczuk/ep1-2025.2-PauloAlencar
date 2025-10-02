@@ -69,4 +69,8 @@ public class PacienteServicos {
     public void addPaciente(Paciente paciente){
         this.pacientes.add(paciente);
     }
+
+    public boolean agendarConsulta(){
+        
+    }
 }
