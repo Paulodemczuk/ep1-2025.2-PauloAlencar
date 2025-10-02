@@ -44,4 +44,9 @@ public class Paciente extends Pessoa {
         System.out.println("CPF: "+ this.cpf);
         System.out.println("----------------------");
     }
+
+    @Override
+    public String toString(){
+        return "---------------------\nNome: "+ this.getNome() +"\nIdade: "+ this.getIdade() + "\nCPF: " + this.getCpf() + "\n---------------------\n";
+    }
 }

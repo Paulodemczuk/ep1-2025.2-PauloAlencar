@@ -21,4 +21,8 @@ public class PacienteEspecial extends Paciente{
         this.plano = plano;
     }
 
+    @Override
+    public String toString(){
+        return "---------------------\nNome: "+ this.getNome() +"\nIdade: "+ this.getIdade() + "\nCPF: " + this.getCpf() + "\nPlano: "+ this.getPlano().getNome() + "\n---------------------\n";
+    }
 }
