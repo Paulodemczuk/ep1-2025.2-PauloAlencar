@@ -65,4 +65,8 @@ public class PacienteServicos {
         }
         return editou;
     }
+
+    public void addPaciente(Paciente paciente){
+        this.pacientes.add(paciente);
+    }
 }
