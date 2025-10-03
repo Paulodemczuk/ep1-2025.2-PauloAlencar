@@ -21,7 +21,7 @@ public class MedicosPersistencia {
             caminhoArquivo = Paths.get("Application/dados/");
             Files.createDirectories(caminhoArquivo);
             try(BufferedWriter escritor = new BufferedWriter(new FileWriter(nomeArquivo))){
-                escritor.write("Nome,Idade,CRM,Especialidade,Custo da Consulta");
+                escritor.write("Nome,Idade,CRM,Especialidade,Custo da Consulta,Horarios: segunda,terca,quarta,quinta,sexta,sabado,domingo");
                 escritor.newLine();
                 
                 for(Medico medico : medicos){
@@ -58,7 +58,7 @@ public class MedicosPersistencia {
                     String crm = dados[2];
                     String especialidade = dados[3];
                     double custoConsulta = Double.parseDouble(dados[4]);
-                    Medico medicoLido = new Medico(nome,idade,crm,especialidade,custoConsulta);
+                    Medico medicoLido = new Medico(nome,idade,especialidade,crm,custoConsulta);
                     medicos.add(medicoLido);
                 }
                 else System.out.println("csv medicos formatado incorretamente");
