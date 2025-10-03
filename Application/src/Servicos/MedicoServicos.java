@@ -54,7 +54,7 @@ public class MedicoServicos {
         return removeu;
     }
 
-    public boolean editarmedico(String crm, String novoNome){
+    public boolean editarMedico(String crm, String novoNome){
         boolean editou = crmCadastrado(crm);
         if(editou){
             getMedico(crm).setNome(novoNome);
@@ -62,7 +62,7 @@ public class MedicoServicos {
         return editou;
     }
 
-    public boolean editarmedico(String crm, int novaIdade){
+    public boolean editarMedico(String crm, int novaIdade){
         boolean editou = crmCadastrado(crm);
         if(editou){
             getMedico(crm).setIdade(novaIdade);
@@ -70,7 +70,7 @@ public class MedicoServicos {
         return editou;
     }
 
-    public void addmedico(Medico medico){
+    public void addMedico(Medico medico){
         this.medicos.add(medico);
     }
 
@@ -78,15 +78,15 @@ public class MedicoServicos {
         
     }
 
-    public ArrayList<Medico> getmedicos() {
+    public ArrayList<Medico> getMedicos() {
         return medicos;
     }
 
-    public void setmedicos(ArrayList<Medico> medicos) {
+    public void setMedicos(ArrayList<Medico> medicos) {
         this.medicos = medicos;
     }
 
-    public void printmedicos(){
+    public void printMedicos(){
         for(Medico medico : medicos){
             System.out.println(medico.getCrm());
         }
