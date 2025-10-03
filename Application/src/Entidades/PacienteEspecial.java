@@ -8,8 +8,8 @@ public class PacienteEspecial extends Paciente{
         this.plano = null;
     }
 
-    public PacienteEspecial(PlanodeSaude plano, String nome, int idade, String telefone, String cpf) {
-        super(nome, idade, telefone, cpf);
+    public PacienteEspecial(PlanodeSaude plano, String nome, int idade, String cpf) {
+        super(nome, idade, cpf);
         this.plano = plano;
     }
 

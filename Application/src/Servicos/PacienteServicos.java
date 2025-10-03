@@ -10,10 +10,10 @@ public class PacienteServicos {
         this.pacientes = new ArrayList<>();
     }
 
-    public boolean cadastrarPaciente(String nome, int idade, String telefone, String cpf){
+    public boolean cadastrarPaciente(String nome, int idade, String cpf){
         boolean cadastrou = cpfCadastrado(cpf);
         if(!cadastrou){
-            Paciente novoPaciente = new Paciente(nome, idade, telefone, cpf);
+            Paciente novoPaciente = new Paciente(nome, idade, cpf);
             this.pacientes.add(novoPaciente);
             cadastrou = true;
         }
@@ -72,5 +72,13 @@ public class PacienteServicos {
 
     public boolean agendarConsulta(){
         
+    }
+
+    public ArrayList<Paciente> getPacientes() {
+        return pacientes;
+    }
+
+    public void setPacientes(ArrayList<Paciente> pacientes) {
+        this.pacientes = pacientes;
     }
 }

@@ -32,7 +32,7 @@ public class Medico extends Pessoa{
     }
 
     public Medico(String nome, int idade, String telefone, String especialidade, String crm, int custoConsulta){
-        super(nome, idade, telefone);
+        super(nome, idade);
         this.especialidade = especialidade;
         this.crm = crm;
         this.custoConsulta = custoConsulta;
@@ -110,7 +110,6 @@ public class Medico extends Pessoa{
         System.out.println("----------------------");
         System.out.println("nome:"+ this.getNome());
         System.out.println("idade:"+ this.getIdade());
-        System.out.println("telefone:"+ this.getTelefone());
         System.out.println("CRM: "+ this.crm);
         System.out.println("Especialidade: "+ this.especialidade);
         System.out.println("Custo da consulta: "+ this.custoConsulta +" reais");
