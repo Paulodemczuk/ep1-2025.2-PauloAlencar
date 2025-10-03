@@ -9,6 +9,9 @@ public class PacienteServicos {
     public PacienteServicos() {
         this.pacientes = new ArrayList<>();
     }
+    public PacienteServicos(ArrayList<Paciente> pacientes) {
+        this.pacientes = pacientes;
+    }
 
     public boolean cadastrarPaciente(String nome, int idade, String cpf){
         boolean cadastrou = cpfCadastrado(cpf);
@@ -24,8 +27,7 @@ public class PacienteServicos {
         boolean existe = false;
         for(Paciente paciente : pacientes){
             if(paciente.getCpf().equals(cpf)){
-                existe = true;
-                break;
+                return existe = true;
             }
         }
         return existe;
@@ -80,5 +82,11 @@ public class PacienteServicos {
 
     public void setPacientes(ArrayList<Paciente> pacientes) {
         this.pacientes = pacientes;
+    }
+
+    public void printPacientes(){
+        for(Paciente paciente : pacientes){
+            System.out.println(paciente.getCpf());
+        }
     }
 }
