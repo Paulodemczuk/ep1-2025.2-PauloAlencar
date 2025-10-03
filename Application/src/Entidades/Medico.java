@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Medico extends Pessoa{
     private String especialidade;
     private String crm;
-    private int custoConsulta;
+    private double custoConsulta;
     private ArrayList<ArrayList<String>> agenda;
 
     public Medico(){
@@ -31,7 +31,7 @@ public class Medico extends Pessoa{
         }
     }
 
-    public Medico(String nome, int idade, String especialidade, String crm, int custoConsulta){
+    public Medico(String nome, int idade, String especialidade, String crm, double custoConsulta){
         super(nome, idade);
         this.especialidade = especialidade;
         this.crm = crm;
@@ -62,7 +62,7 @@ public class Medico extends Pessoa{
         return this.crm;
     }
 
-    public int getCustoConsulta(){
+    public double getCustoConsulta(){
         return this.custoConsulta;
     }
 
@@ -74,7 +74,7 @@ public class Medico extends Pessoa{
         this.crm = crm;
     }
 
-    public void setCustoConsulta(int custoConsulta){
+    public void setCustoConsulta(double custoConsulta){
         this.custoConsulta = custoConsulta;
     }
 
