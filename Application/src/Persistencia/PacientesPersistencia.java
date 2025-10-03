@@ -1,6 +1,7 @@
 package Persistencia;
 
 import Entidades.Paciente;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,10 +13,11 @@ import java.util.ArrayList;
 public class PacientesPersistencia {
 
     private final String nomeArquivo = "Application/dados/pacientes.csv";
+    private Path caminhoArquivo;
 
     public void salvarPacientes(ArrayList<Paciente> pacientes){
         try{
-            Path caminhoArquivo = Paths.get("Application/dados/");
+            caminhoArquivo = Paths.get("Application/dados/");
             Files.createDirectories(caminhoArquivo);
             try(BufferedWriter escritor = new BufferedWriter(new FileWriter(nomeArquivo))){
                 escritor.write("Nome,Idade,CPF");
@@ -36,5 +38,35 @@ public class PacientesPersistencia {
             System.out.println("erro ao criar pasta dados" + ex.getMessage());
         }
 
+    }
+
+    public ArrayList<Paciente> carregarPacientes(){
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        try{
+            caminhoArquivo = Paths.get(nomeArquivo);
+            Files.createDirectories(Paths.get("Application/dados/"));
+            Files.createFile(caminhoArquivo);
+            try(BufferedReader leitor = Files.newBufferedReader(caminhoArquivo)) {
+                String linha;
+                leitor.readLine();
+                
+                while((linha = leitor.readLine()) != null){
+                    String[] dados = linha.split(",");
+                    if(dados.length == 3){
+                        String nome = dados[0];
+                        int idade = Integer.parseInt(dados[1]);
+                        String cpf = dados[2];
+                        Paciente pacienteLido = new Paciente(nome,idade,cpf);
+                        pacientes.add(pacienteLido);
+                    }
+                    else System.out.println("csv formatado incorretamente");
+                }
+            } catch (IOException e) {
+                System.out.println("Erro ao ler o arquivo "+ e.getMessage());
+            }
+        } catch (IOException ex) {
+            System.out.println("erro ao criar pasta dados e/ou arquivo csv" + ex.getMessage());
+        }
+        return pacientes;
     }
 }
