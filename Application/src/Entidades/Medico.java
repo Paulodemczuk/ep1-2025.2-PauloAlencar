@@ -31,7 +31,7 @@ public class Medico extends Pessoa{
         }
     }
 
-    public Medico(String nome, int idade, String telefone, String especialidade, String crm, int custoConsulta){
+    public Medico(String nome, int idade, String especialidade, String crm, int custoConsulta){
         super(nome, idade);
         this.especialidade = especialidade;
         this.crm = crm;
