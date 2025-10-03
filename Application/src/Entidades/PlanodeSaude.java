@@ -9,13 +9,13 @@ public class PlanodeSaude {
 
     public PlanodeSaude(){
         this.nome = "";
-        this.especialidades = new ArrayList();
+        this.especialidades = new ArrayList<>();
         this.valorDesconto = 1;
     }
 
     public PlanodeSaude(String nome, double valorDesconto){
         this.nome = nome;
-        this.especialidades = new ArrayList();
+        this.especialidades = new ArrayList<>();
         this.valorDesconto = valorDesconto;
     }
 
