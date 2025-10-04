@@ -1,6 +1,7 @@
 package Entidades;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Consulta {
     private Paciente paciente;
@@ -16,14 +17,16 @@ public class Consulta {
         this.local = "";
         this.status = 0;
         this.dataHora = LocalDateTime.now();
+        this.diagnostico = " ";
     }
 
-    public Consulta(Paciente paciente, Medico medico,String local, int status, LocalDateTime dataHora){
+    public Consulta(Paciente paciente, Medico medico,String local, int status, LocalDateTime dataHora,String diagnostico){
         this.paciente = paciente;
         this.medico = medico;
         this.local = local;
         this.status = status;
         this.dataHora = dataHora;
+        this.diagnostico = diagnostico;
     }
 
     public void setPaciente(Paciente paciente){
@@ -50,17 +53,8 @@ public class Consulta {
     public void setStatus(int status){
         this.status = status;
     }
-    public String getStatus(){
-        switch (this.status) {
-            case 0:
-                return "Agendada";
-            case 1:
-                return "Concluída";
-            case 2:
-                return "Cancelada";
-            default:
-                return "Sem status";
-        }
+    public int getStatus(){
+        return status;
     }
 
     public void setDataHora(LocalDateTime dataHora){
@@ -68,6 +62,12 @@ public class Consulta {
     }
     public LocalDateTime getDataHora(){
         return this.dataHora;
+    }
+
+    public String getDataHoraFormatada(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
+        String dataHoraFormatada = dataHora.format(formatter);
+        return dataHoraFormatada;
     }
 
     public String getDiagnostico() {
