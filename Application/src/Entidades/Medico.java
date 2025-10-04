@@ -79,8 +79,15 @@ public class Medico extends Pessoa{
     }
 
     public void adicionarHorario(int dia, String horario){
-        dia--;
         agenda.get(dia).add(horario);
+    }
+
+    public void adicionarHorarios(int dia, String horarios){
+        String[] horario = horarios.split(" ");
+        int quantidadeHorarios = horario.length;
+        for(int nr1 = 0; nr1 < quantidadeHorarios; nr1++){
+            agenda.get(dia).add(horario[nr1]);
+        }
     }
 
     public void exibirAgenda(){
@@ -98,6 +105,17 @@ public class Medico extends Pessoa{
             else System.out.println("sem vagas");
         }
     }
+        public String getHorarios(int dia){
+            String horarios = "";
+            if(agenda.get(dia).size()==1){
+                return " ";
+            }
+            horarios += agenda.get(dia).get(1);
+            for(int nr1 = 2; nr1 < agenda.get(dia).size();nr1++){
+                horarios +=  " " + agenda.get(dia).get(nr1);
+            }
+            return horarios;
+        }
 
     public boolean verificarAtendimento(int dia, String horario){
         boolean atende;
