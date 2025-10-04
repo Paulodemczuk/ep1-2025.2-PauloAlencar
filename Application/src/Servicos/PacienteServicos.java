@@ -11,9 +11,11 @@ public class PacienteServicos {
 
     public PacienteServicos() {
         this.pacientes = new ArrayList<>();
+        this.pacientesEspeciais = new ArrayList<>();
     }
     public PacienteServicos(ArrayList<Paciente> pacientes) {
         this.pacientes = pacientes;
+        this.pacientesEspeciais = new ArrayList<>();
     }
 
     public boolean cadastrarPaciente(String nome, int idade, String cpf){
@@ -129,7 +131,9 @@ public class PacienteServicos {
 
     public void printPacientesEspeciais(){
         for(PacienteEspecial pacienteEspecial : pacientesEspeciais){
+            System.out.println(pacienteEspecial.getNome());
             System.out.println(pacienteEspecial.getCpf());
+            System.out.println(pacienteEspecial.getPlano().getNome());
         }
     }
 
