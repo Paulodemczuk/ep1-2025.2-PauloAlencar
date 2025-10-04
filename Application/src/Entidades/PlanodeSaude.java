@@ -19,6 +19,12 @@ public class PlanodeSaude {
         this.valorDesconto = valorDesconto;
     }
 
+    public PlanodeSaude(String nome, double valorDesconto, ArrayList<String> especialidades){
+        this.nome = nome;
+        this.especialidades = especialidades;
+        this.valorDesconto = valorDesconto;
+    }
+
     public String getNome() {
         return nome;
     }
