@@ -119,7 +119,7 @@ public class Medico extends Pessoa{
 
     public boolean verificarAtendimento(int dia, String horario){
         boolean atende;
-        atende = agenda.get(dia-1).contains(horario);
+        atende = agenda.get(dia).contains(horario);
         return atende;
     }
 
