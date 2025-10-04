@@ -1,17 +1,24 @@
-import Entidades.*;
-import Menus.MenuPaciente;
+import Persistencia.MedicosPersistencia;
+import Persistencia.PacientesEspeciaisPercistencia;
+import Persistencia.PacientesPersistencia;
+import Persistencia.PlanoPersistencia;
+import Servicos.MedicoServicos;
+import Servicos.PacienteServicos;
+import Servicos.PlanoServicos;
 public class appTeste {
     public static void main(String[] args) {
-        Paciente machucado = new Paciente();
-        machucado.setNome("Super Tadinho");
-        machucado.setIdade(70);
-        machucado.setCpf("123.321.892-20");
-        machucado.printInformacoes();
-        Medico med1 = new Medico();
-        med1.setNome("Doutor forte");
-        med1.setCrm("21345 SP");
-        med1.setEspecialidade("Cardiologista");
-        med1.printInformacoes();
-        MenuPaciente.exibirMenuPaciente();
+        PacienteServicos pServicos = new PacienteServicos();
+        MedicoServicos mServicos = new MedicoServicos();
+        PlanoServicos planoServicos= new PlanoServicos();
+        PacientesPersistencia pPersistencia = new PacientesPersistencia();
+        MedicosPersistencia mPersistencia = new MedicosPersistencia();
+        PacientesEspeciaisPercistencia pePersistencia = new PacientesEspeciaisPercistencia();
+        PlanoPersistencia planoPersistencia = new PlanoPersistencia();
+
+        
+        //planoPersistencia.salvarPlanos(planoServicos.getPlanosdeSaude());
+        //mPersistencia.salvarMedicos(mServicos.getMedicos());
+        //pPersistencia.salvarPacientes(pServicos.getPacientes());
+        //pePersistencia.salvarPacientesEspeciais(pServicos.getPacientesEspeciais());
     }
 }
