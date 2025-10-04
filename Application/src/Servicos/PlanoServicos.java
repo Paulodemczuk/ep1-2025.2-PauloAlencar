@@ -46,4 +46,15 @@ public class PlanoServicos {
         this.planosdeSaude = planosdeSaude;
     }
     
+    public void printPlanosdeSaude(){
+        for(PlanodeSaude planodeSaude : planosdeSaude){
+            System.out.println();
+            System.out.println(planodeSaude.getNome());
+            System.out.println(planodeSaude.getValorDesconto());
+            for(String especialidade : planodeSaude.getEspecialidades()){
+                System.out.printf(especialidade + " ");
+            }
+            System.out.println();
+        }
+    }
 }
