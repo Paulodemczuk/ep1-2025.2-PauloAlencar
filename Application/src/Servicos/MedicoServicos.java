@@ -1,8 +1,7 @@
 package Servicos;
 
-import java.util.ArrayList;
-
 import Entidades.Medico;
+import java.util.ArrayList;
 
 public class MedicoServicos {
     private ArrayList<Medico> medicos;
@@ -74,10 +73,6 @@ public class MedicoServicos {
         this.medicos.add(medico);
     }
 
-    public boolean internarPaciente(){
-        
-    }
-
     public ArrayList<Medico> getMedicos() {
         return medicos;
     }
@@ -88,6 +83,7 @@ public class MedicoServicos {
 
     public void printMedicos(){
         for(Medico medico : medicos){
+            System.out.println(medico.getNome());
             System.out.println(medico.getCrm());
         }
     }
