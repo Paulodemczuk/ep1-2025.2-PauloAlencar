@@ -41,7 +41,7 @@ public class ConsultaServicos {
             if(retorno == 1) return 1;
         }
         
-        Consulta consultaAgendada = new Consulta(paciente, medico, local, status, dataHora);
+        Consulta consultaAgendada = new Consulta(paciente, medico, local, status, dataHora," ");
         this.consultas.add(consultaAgendada);            
         return retorno; //0 se deu tudo certo , 1 se o medico possui consulta marcada para esse horario , 2 se o local ja esta agendado para esse horario, 3 se ambos estao indisponiveis e 4 se medico nao atende nesse horario
     }
@@ -80,5 +80,20 @@ public class ConsultaServicos {
 
     public void setConsultas(ArrayList<Consulta> consultas) {
         this.consultas = consultas;
+    }
+
+    public void printConsultas(){
+        for(Consulta consulta : consultas){
+            System.out.println(consulta.getMedico().getNome());
+            System.out.println(consulta.getPaciente().getNome());
+            System.out.println(consulta.getLocal());
+            System.out.println(consulta.getStatus());
+            System.out.println(consulta.getDataHoraFormatada());
+            System.out.println(consulta.getDiagnostico());
+        }
+    }
+
+    public void addConsulta(Consulta consulta){
+        this.consultas.add(consulta);
     }
 }
