@@ -1,10 +1,13 @@
 package Servicos;
 
 import Entidades.Paciente;
+import Entidades.PacienteEspecial;
+import Entidades.PlanodeSaude;
 import java.util.ArrayList;
 
 public class PacienteServicos {
     private ArrayList<Paciente> pacientes;
+    private ArrayList<PacienteEspecial> pacientesEspeciais;
 
     public PacienteServicos() {
         this.pacientes = new ArrayList<>();
@@ -23,10 +26,25 @@ public class PacienteServicos {
         return cadastrou;
     }
 
+    public boolean cadastrarPacienteEspecial(String nome, int idade, String cpf,PlanodeSaude plano){
+        boolean cadastrou = cpfCadastrado(cpf);
+        if(!cadastrou){
+            PacienteEspecial novoPacienteEspecial = new PacienteEspecial(plano, nome, idade, cpf);
+            this.pacientes.add(novoPacienteEspecial);
+            cadastrou = true;
+        }
+        return cadastrou;
+    }
+
     public boolean cpfCadastrado(String cpf){
         boolean existe = false;
         for(Paciente paciente : pacientes){
             if(paciente.getCpf().equals(cpf)){
+                return existe = true;
+            }
+        }
+        for(PacienteEspecial pacienteEspecial: pacientesEspeciais){
+            if(pacienteEspecial.getCpf().equals(cpf)){
                 return existe = true;
             }
         }
@@ -43,10 +61,29 @@ public class PacienteServicos {
         return retorno;
     }
 
+    public PacienteEspecial getPacienteEspecial(String cpf){
+        PacienteEspecial retorno = new PacienteEspecial();
+        for(PacienteEspecial pacienteEspecial: pacientesEspeciais){
+            if(pacienteEspecial.getCpf().equals(cpf)){
+                retorno = pacienteEspecial;
+            }
+        }
+        return retorno;
+    }
+
     public boolean excluirPaciente(String cpf){
         boolean removeu = cpfCadastrado(cpf);
         if(removeu){
             this.pacientes.remove(getPaciente(cpf));
+            removeu = true;              
+        }
+        return removeu;
+    }
+
+    public boolean excluirPacienteEspecial(String cpf){
+        boolean removeu = cpfCadastrado(cpf);
+        if(removeu){
+            this.pacientesEspeciais.remove(getPacienteEspecial(cpf));
             removeu = true;              
         }
         return removeu;
@@ -72,8 +109,8 @@ public class PacienteServicos {
         this.pacientes.add(paciente);
     }
 
-    public boolean agendarConsulta(){
-        
+    public void addPacienteEspecial(PacienteEspecial pacienteEspecial){
+        this.pacientesEspeciais.add(pacienteEspecial);
     }
 
     public ArrayList<Paciente> getPacientes() {
@@ -88,5 +125,19 @@ public class PacienteServicos {
         for(Paciente paciente : pacientes){
             System.out.println(paciente.getCpf());
         }
+    }
+
+    public void printPacientesEspeciais(){
+        for(PacienteEspecial pacienteEspecial : pacientesEspeciais){
+            System.out.println(pacienteEspecial.getCpf());
+        }
+    }
+
+    public ArrayList<PacienteEspecial> getPacientesEspeciais() {
+        return pacientesEspeciais;
+    }
+
+    public void setPacientesEspeciais(ArrayList<PacienteEspecial> pacientesEspeciais) {
+        this.pacientesEspeciais = pacientesEspeciais;
     }
 }
