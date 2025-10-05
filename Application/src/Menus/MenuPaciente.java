@@ -1,7 +1,7 @@
 package Menus;
 
-import Entidades.Medico;
-import Entidades.Paciente;
+import Entidades.*;
+import static Menus.Cores.delay;
 import Servicos.ConsultaServicos;
 import Servicos.MedicoServicos;
 import Servicos.PacienteServicos;
@@ -40,6 +40,9 @@ public class MenuPaciente {
                     break;
                 case 2:
                     agendarConsulta(sc);
+                    break;
+                case 3:
+                    alterarConsulta(sc);
                     break;
                 case 0:
                     System.out.println("Voltando ao menu principal...");
@@ -160,7 +163,45 @@ public class MenuPaciente {
                 System.out.println("Erro ao cadastrar consulta");
                 break;
         }
+    }
 
-        
+    public void alterarConsulta(Scanner sc){
+        System.out.println("\nAlterar consulta selecionado...");
+        System.out.println("\nDigite o id da consulta que deseja alterar:\n");
+        int opcao;
+        int id = sc.nextInt();
+        sc.nextLine();
+        Consulta consultaAlterada = consultaServicos.getConsulta(id);
+        if(consultaAlterada.getMedico().getNome().equals("")){
+            System.out.println("\n Esse id não existe!\n");
+            alterarConsulta(sc);
+        }
+        System.out.println();
+        System.out.println(consultaAlterada.getIdConsulta());
+        System.out.println(consultaAlterada.getMedico().getNome());
+        System.out.println(consultaAlterada.getPaciente().getNome());
+        System.out.println(consultaAlterada.getLocal());
+        System.out.println(consultaAlterada.getStatus());
+        System.out.println(consultaAlterada.getDataHoraFormatada());
+        System.out.println(consultaAlterada.getDiagnostico());
+        System.out.println();
+        delay(1);
+        System.out.println("Deseja cancelar a Consulta?\n");
+        System.out.println("1.Sim 2.Não\n");
+        while(true){
+            opcao = sc.nextInt();
+            sc.nextLine();
+            if(opcao == 1){
+                consultaAlterada.setStatus(2);
+                System.out.println("\nConsulta cancelada!\n");
+                delay(1);
+                break;
+            }
+            else if(opcao == 2){
+                System.out.println("\nConsulta confirmada!\n");
+                delay(1);
+                break;
+            }
+        }
     }
 }
