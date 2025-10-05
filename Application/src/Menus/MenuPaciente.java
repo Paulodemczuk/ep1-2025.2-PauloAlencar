@@ -28,18 +28,10 @@ public class MenuPaciente {
     
 
     public void acessarMenuPaciente(Scanner sc){
-        System.out.println("-----Menu Paciente------");
-        System.out.println("1. Exibir Paciente");//
-        System.out.println("2. Agendar Consulta");
-        System.out.println("3. Alterar Consulta");
-        System.out.println("4. Historico de Consultas");
-        System.out.println("5. Quarto da internação");
-        System.out.println("6. Historico de Internações");
-        System.out.println(". Adicionar Plano de Saude");
-        System.out.println(". Agendar Consulta para dependentes");
-
+        
         int escolha = -1; 
         while(escolha != 0){
+            exibirMenuPaciente();
             escolha = sc.nextInt();
             sc.nextLine();
             switch (escolha){
@@ -57,6 +49,20 @@ public class MenuPaciente {
             }
 
         }
+    }
+
+    public void exibirMenuPaciente(){
+        System.out.println();
+        System.out.println("-----Menu Paciente------");
+        System.out.println("1. Exibir Paciente");//
+        System.out.println("2. Agendar Consulta");//
+        System.out.println("3. Alterar Consulta");
+        System.out.println("4. Historico de Consultas");
+        System.out.println("5. Quarto da internação");
+        System.out.println("6. Historico de Internações");
+        System.out.println(". Adicionar Plano de Saude");
+        System.out.println(". Agendar Consulta para dependentes");
+
     }
 
     public void exibirPaciente(Scanner sc){
@@ -89,32 +95,72 @@ public class MenuPaciente {
 
     public void agendarConsulta(Scanner sc){
         int id;
-        Paciente paciente;
+        Paciente paciente = new Paciente();
         Medico medico;
-        String local;
+        String local="";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
-        LocalDateTime dataHora;
+        LocalDateTime dataHora = LocalDateTime.now();
+        int correto = 2;
+        String cpf = "";
+        String crm = "";
 
-        System.out.println("\nAgendar consultas selecionado\n");
-        System.out.println("Digite seu CPF: \n");
-        String cpf = sc.nextLine();
-        System.out.println("\nDigite o CRM do medico desejado: ");
-        String crm = sc.nextLine();
-        System.out.println("\nDigite o local desejado para a consulta: ");
-        local = sc.nextLine();
-        System.out.println("\nDigite a data e hora desejada para a consulta (Siga o formato 'dd/MM/yyyy-HH:mm'): ");
-        String dataHoraFormatada = sc.nextLine();
-        dataHora = LocalDateTime.parse(dataHoraFormatada,formatter);
-
-        System.out.println("As informações estão corretas?");
-        System.out.printf("\nNome do paciente: %s\nNome do medico: %s\nLocal da consulta: %s\nData e hora: %s\n", pacienteServicos.getPaciente(cpf).getNome(),medicoServicos.getMedico(crm).getNome(),local,dataHoraFormatada);        
-
-
-
-
-
-        //int retorno = consultaServicos.cadastrarConsulta(id, paciente, medico, local, status, dataHora);
-
+        while(correto == 2){
+            System.out.println("\nAgendar consultas selecionado\n");
+            System.out.println("Digite seu CPF: \n");
+            cpf = sc.nextLine();
+            System.out.println("\nDigite o CRM do medico desejado: ");
+            crm = sc.nextLine();
+            System.out.println("\nDigite o local desejado para a consulta: ");
+            local = sc.nextLine();
+            System.out.println("\nDigite a data e hora desejada para a consulta (Siga o formato 'dd/MM/yyyy-HH:mm'): ");
+            String dataHoraFormatada = sc.nextLine();
+            dataHora = LocalDateTime.parse(dataHoraFormatada,formatter);
+    
+            System.out.println("\nAs informações estão corretas?");
+            System.out.printf("\nNome do paciente: %s\nNome do medico: %s\nLocal da consulta: %s\nData e hora: %s\n", pacienteServicos.getPaciente(cpf).getNome(),medicoServicos.getMedico(crm).getNome(),local,dataHoraFormatada);        
+            System.out.println("\n1.Sim 2.Não 0.Cancelar");
+            correto = sc.nextInt();
+            sc.nextLine();
+        }
+        if(correto == 0){
+            exibirMenuPaciente();
+            return;
+        }
         double precodaConsulta;
+        id = consultaServicos.getConsultas().size()+1;
+        
+        if(paciente == pacienteServicos.getPaciente(cpf)){
+            paciente = pacienteServicos.getPacienteEspecial(cpf);
+        }
+        medico = medicoServicos.getMedico(crm);
+        int retorno = consultaServicos.cadastrarConsulta(id, paciente, medico, local, 0, dataHora);
+        precodaConsulta = consultaServicos.getConsulta(id).valorConsulta();
+
+        switch (retorno) {
+            //0 se deu tudo certo , 1 se o medico possui consulta marcada para esse horario , 2 se o local ja esta agendado para esse horario, 3 se ambos estao indisponiveis e 4 se medico nao atende nesse horario
+    
+            case 0:
+                System.out.println("Consulta de id: "+id+ "cadastrada!");
+                System.out.println("O valor a pagar é de: "+precodaConsulta);
+                break;
+            case 1:
+                System.out.println("O medico esta indisponivel neste horario");
+                break;
+            case 2:
+                System.out.println("O local esta indisponivel neste horario");
+                break;
+            case 3:
+                System.out.println("O medico e o local estão indisponiveis neste horario");
+                break;
+            case 4:
+                System.out.println("O medico não atende neste horario");
+                break;
+        
+            default:
+                System.out.println("Erro ao cadastrar consulta");
+                break;
+        }
+
+        
     }
 }
