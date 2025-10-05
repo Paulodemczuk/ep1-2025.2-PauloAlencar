@@ -23,18 +23,15 @@ public class ConsultaServicos {
         String horario = dataHora.format(formatacao);
 
         if(medico.verificarAtendimento(dia, horario) == false){
-            System.out.println("o medico nao atende nesse horario");
             return 4;
         }
         int retorno = 0;
 
         for(Consulta consulta : consultas){
             if((consulta.getMedico().getCrm().equals(medico.getCrm())) && (consulta.getDataHora()== dataHora)){
-                System.out.println("Medico ja possui consulta marcada para esse horario");
                 retorno = 1;
             }
             if((consulta.getLocal().equals(local)) && (consulta.getDataHora() == dataHora)){
-                System.out.println("Esse local ja possui uma consulta agendada para este horario");
                 if(retorno == 1) return 3;
                 else retorno = 2;
             }
