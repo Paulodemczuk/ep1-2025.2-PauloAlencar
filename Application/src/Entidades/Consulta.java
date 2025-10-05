@@ -88,4 +88,19 @@ public class Consulta {
     public void setIdConsulta(int idConsulta) {
         this.idConsulta = idConsulta;
     }
+    public double valorConsulta(){
+        double aPagar;
+        if(paciente instanceof PacienteEspecial){
+            double desconto = ((PacienteEspecial)paciente).getPlano().getValorDesconto();
+            for(String especialidade : ((PacienteEspecial)paciente).getPlano().getEspecialidades()){
+                if(especialidade.equals(medico.getEspecialidade())){
+                    desconto -= 0.1;
+                    break;
+                }
+            }
+            aPagar = medico.getCustoConsulta() * desconto;
+            return aPagar;
+        }
+        else return medico.getCustoConsulta();
+    }
 }
