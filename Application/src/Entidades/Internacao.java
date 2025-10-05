@@ -11,6 +11,7 @@ public class Internacao {
     private LocalDate dataSaida;
     private int quarto;
     private double custoInternacao;
+    private int idInternacao;
 
     public Internacao(){
         this.paciente = new Paciente();
@@ -19,15 +20,17 @@ public class Internacao {
         this.dataSaida = LocalDate.now().minusDays(1);
         this.quarto = 0;
         this.custoInternacao = 0;
+        this.idInternacao = 0;
     }
 
-    public Internacao(Paciente paciente, Medico medico, LocalDate dataEntrada, LocalDate dataSaida, int quarto, double custoInternacao){
+    public Internacao(int idInternacao,Paciente paciente, Medico medico, LocalDate dataEntrada, LocalDate dataSaida, int quarto, double custoInternacao){
         this.paciente = paciente;
         this.medico = medico;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
         this.quarto = quarto;
         this.custoInternacao = custoInternacao;
+        this.idInternacao = idInternacao;
     }
 
     public Paciente getPaciente() {
@@ -93,5 +96,13 @@ public class Internacao {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dataSaidaFormatada = dataSaida.format(formatter);
         return dataSaidaFormatada;
+    }
+
+    public int getIdInternacao() {
+        return idInternacao;
+    }
+
+    public void setIdInternacao(int idInternacao) {
+        this.idInternacao = idInternacao;
     }
 }
