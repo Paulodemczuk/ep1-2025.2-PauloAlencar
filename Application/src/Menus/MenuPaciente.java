@@ -44,9 +44,12 @@ public class MenuPaciente {
                 case 3:
                     alterarConsulta(sc);
                     break;
+                case 4:
+                    historicoConsultas(sc);
+                    break;
                 case 0:
                     System.out.println("Voltando ao menu principal...");
-                    break;
+                    return;
                 default:
                     System.out.println("Escolha uma alternativa valida");
             }
@@ -59,7 +62,7 @@ public class MenuPaciente {
         System.out.println("-----Menu Paciente------");
         System.out.println("1. Exibir Paciente");//
         System.out.println("2. Agendar Consulta");//
-        System.out.println("3. Alterar Consulta");
+        System.out.println("3. Alterar Consulta");//
         System.out.println("4. Historico de Consultas");
         System.out.println("5. Quarto da internação");
         System.out.println("6. Historico de Internações");
@@ -73,7 +76,7 @@ public class MenuPaciente {
         System.out.println("Digite o CPF do paciente desejado:");
         String cpf = sc.nextLine();
         System.out.println(cpf);
-        if(!pacienteServicos.cpfCadastrado(cpf)){
+        if(pacienteServicos.cpfCadastrado(cpf)==false){
             System.out.println("\nCPF não cadastrado.");
             System.out.println("\nPressione 0 para voltar.");
             int voltar = 1;
@@ -81,7 +84,19 @@ public class MenuPaciente {
                 voltar = sc.nextInt();
                 sc.nextLine();
             } 
-            this.acessarMenuPaciente(sc);
+            
+        }
+        else if(pacienteServicos.getPaciente(cpf).getNome().equals("")){
+            System.out.println("\n"+pacienteServicos.getPacienteEspecial(cpf).toString());
+            System.out.println();
+            System.out.println("Pressione 0 para voltar.");
+            int voltar = 1;
+            while(voltar != 0){
+                voltar = sc.nextInt();
+                sc.nextLine();
+            } 
+            exibirMenuPaciente();
+            return;
         }
         else{
             System.out.println("\n"+pacienteServicos.getPaciente(cpf).toString());
@@ -92,7 +107,8 @@ public class MenuPaciente {
                 voltar = sc.nextInt();
                 sc.nextLine();
             } 
-            this.acessarMenuPaciente(sc);
+            exibirMenuPaciente();
+            return;
         }
     }
 
@@ -118,9 +134,12 @@ public class MenuPaciente {
             System.out.println("\nDigite a data e hora desejada para a consulta (Siga o formato 'dd/MM/yyyy-HH:mm'): ");
             String dataHoraFormatada = sc.nextLine();
             dataHora = LocalDateTime.parse(dataHoraFormatada,formatter);
-    
+            
+            if(paciente.getNome().equals(pacienteServicos.getPaciente(cpf).getNome())){
+                paciente = pacienteServicos.getPacienteEspecial(cpf);
+            }else paciente = pacienteServicos.getPaciente(cpf);
             System.out.println("\nAs informações estão corretas?");
-            System.out.printf("\nNome do paciente: %s\nNome do medico: %s\nLocal da consulta: %s\nData e hora: %s\n", pacienteServicos.getPaciente(cpf).getNome(),medicoServicos.getMedico(crm).getNome(),local,dataHoraFormatada);        
+            System.out.printf("\nNome do paciente: %s\nNome do medico: %s\nLocal da consulta: %s\nData e hora: %s\n", paciente.getNome(),medicoServicos.getMedico(crm).getNome(),local,dataHoraFormatada);        
             System.out.println("\n1.Sim 2.Não 0.Cancelar");
             correto = sc.nextInt();
             sc.nextLine();
@@ -132,9 +151,6 @@ public class MenuPaciente {
         double precodaConsulta;
         id = consultaServicos.getConsultas().size()+1;
         
-        if(paciente == pacienteServicos.getPaciente(cpf)){
-            paciente = pacienteServicos.getPacienteEspecial(cpf);
-        }
         medico = medicoServicos.getMedico(crm);
         int retorno = consultaServicos.cadastrarConsulta(id, paciente, medico, local, 0, dataHora);
         precodaConsulta = consultaServicos.getConsulta(id).valorConsulta();
@@ -202,6 +218,72 @@ public class MenuPaciente {
                 delay(1);
                 break;
             }
+        }
+    }
+
+    public void historicoConsultas(Scanner sc){
+        int opcao;
+        System.out.println("Acessando Historico de consultas...");
+        delay(1);
+        System.out.println("\nDigite seu CPF: ");
+        String cpf = sc.nextLine();
+
+        if(pacienteServicos.cpfCadastrado(cpf) == false){
+            System.out.println("\nEsse CPF não está cadastrado!\n");
+            delay(1);
+            exibirMenuPaciente();
+            return;
+        }
+        if(pacienteServicos.getPaciente(cpf).getNome().equals("")){
+            PacienteEspecial paciente = pacienteServicos.getPacienteEspecial(cpf);
+            for(Consulta consulta : paciente.getConsultas()){
+                delay(1);
+                System.out.println("\nid da consulta: "+consulta.getIdConsulta());
+                System.out.println("Medico: "+consulta.getMedico().getNome());
+                System.out.println("Paciente: "+consulta.getPaciente().getNome());
+                System.out.println("Local: "+consulta.getLocal());
+                System.out.println("Status: "+consulta.getStatusString());
+                System.out.println("Data e hora: "+consulta.getDataHoraFormatada());
+                if(consulta.getStatus()==1)System.out.println("Diagnostico medico: "+consulta.getDiagnostico());
+                System.out.println("Valor a pagar: "+consulta.valorConsulta());
+                
+                System.out.println("\nPrecione 1 para continuar");
+                System.out.println("Precione 0 para sair");
+                opcao = sc.nextInt();
+                sc.nextLine();
+                if(opcao == 0){
+                    exibirMenuPaciente();
+                return;
+                }
+            }
+            System.out.println("Fim do historico, voltando ao menu...");
+            delay(1);
+        }
+        else {
+            Paciente paciente = pacienteServicos.getPaciente(cpf);
+            for(Consulta consulta : paciente.getConsultas()){
+                delay(1);
+                System.out.println("\nid da consulta: "+consulta.getIdConsulta());
+                System.out.println("Medico: "+consulta.getMedico().getNome());
+                System.out.println("Paciente: "+consulta.getPaciente().getNome());
+                System.out.println("Local: "+consulta.getLocal());
+                System.out.println("Status: "+consulta.getStatusString());
+                System.out.println("Data e hora: "+consulta.getDataHoraFormatada());
+                if(consulta.getStatus()==1)System.out.println("Diagnostico medico: "+consulta.getDiagnostico());
+                System.out.println("Valor a pagar: "+consulta.valorConsulta());
+                
+                System.out.println("\nPrecione 1 para continuar");
+                System.out.println("Precione 0 para sair");
+                opcao = sc.nextInt();
+                sc.nextLine();
+                if(opcao == 0){
+                    exibirMenuPaciente();
+                return;
+                }
+            }
+            System.out.println("Fim do historico, voltando ao menu...");
+            delay(1);
+        
         }
     }
 }
