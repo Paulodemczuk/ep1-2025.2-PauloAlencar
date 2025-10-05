@@ -57,7 +57,7 @@ public class Consulta {
         this.status = status;
     }
     public int getStatus(){
-        return status;
+        return status; //0 = agendada, 1 = concluida, 2 = cancelada
     }
 
     public void setDataHora(LocalDateTime dataHora){
