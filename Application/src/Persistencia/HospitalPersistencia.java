@@ -11,12 +11,12 @@ public class HospitalPersistencia {
     private ConsultaPersistencia consultaPersistencia;
 
     public HospitalPersistencia(){
-        PacientesPersistencia pacientesPersistencia = new PacientesPersistencia();
-        PacientesEspeciaisPercistencia pacientesEspeciaisPercistencia = new PacientesEspeciaisPercistencia();
-        PlanoPersistencia planoPersistencia = new PlanoPersistencia();
-        MedicosPersistencia medicosPersistencia = new MedicosPersistencia();
-        InternacaoPersistencia internacaoPersistencia = new InternacaoPersistencia();
-        ConsultaPersistencia consultaPersistencia = new ConsultaPersistencia();
+        this.pacientesPersistencia = new PacientesPersistencia();
+        this.pacientesEspeciaisPercistencia = new PacientesEspeciaisPercistencia();
+        this.planoPersistencia = new PlanoPersistencia();
+        this.medicosPersistencia = new MedicosPersistencia();
+        this.internacaoPersistencia = new InternacaoPersistencia();
+        this.consultaPersistencia = new ConsultaPersistencia();
     }
 
     public void salvarHospital(PacienteServicos pacienteServicos, MedicoServicos medicoServicos, PlanoServicos planoServicos, ConsultaServicos consultaServicos, InternacaoServicos internacaoServicos){
