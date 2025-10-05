@@ -1,16 +1,17 @@
 import Menus.*;
 import static Menus.Cores.delay;
-import Persistencia.PacientesEspeciaisPercistencia;
-import Persistencia.PacientesPersistencia;
+import Persistencia.HospitalPersistencia;
+import Servicos.HospitalServicos;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        PacientesPersistencia pacientesPersistencia = new PacientesPersistencia();
-        PacientesEspeciaisPercistencia pacientesEspeciaisPercistencia = new PacientesEspeciaisPercistencia();
+        HospitalPersistencia hospitalPersistencia = new HospitalPersistencia();
+        HospitalServicos hospitalServicos = new HospitalServicos();
+        hospitalPersistencia.carregarHospital(hospitalServicos);
 
-        MenuPaciente menuPaciente = new MenuPaciente();
+        MenuPaciente menuPaciente = new MenuPaciente(hospitalServicos);
         menuPrincipal(scanner,menuPaciente);
 
     
@@ -25,7 +26,7 @@ public class App {
             sc.nextLine();
             switch (menu){
                 case 1: 
-                    delay(2);
+                    delay(1);
                     menuPaciente.acessarMenuPaciente(sc);
                     break;
                 case 2: 
