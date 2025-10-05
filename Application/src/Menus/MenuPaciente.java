@@ -2,9 +2,7 @@ package Menus;
 
 import Entidades.*;
 import static Menus.Cores.delay;
-import Servicos.ConsultaServicos;
-import Servicos.MedicoServicos;
-import Servicos.PacienteServicos;
+import Servicos.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -13,16 +11,25 @@ public class MenuPaciente {
     private final PacienteServicos pacienteServicos;
     private final ConsultaServicos consultaServicos;
     private final MedicoServicos medicoServicos;
+    private final InternacaoServicos internacaoServicos;
 
     public MenuPaciente() {
         this.pacienteServicos = new PacienteServicos();
         this.consultaServicos = new ConsultaServicos();
         this.medicoServicos = new MedicoServicos();
+        this.internacaoServicos = new InternacaoServicos();
     }
     public MenuPaciente(PacienteServicos pacienteServicos,ConsultaServicos consultaServicos,MedicoServicos medicoServicos){
         this.pacienteServicos = pacienteServicos;
         this.consultaServicos = consultaServicos;
         this.medicoServicos = medicoServicos;
+        this.internacaoServicos = new InternacaoServicos();
+    }
+    public MenuPaciente(HospitalServicos hospitalServicos){
+        this.pacienteServicos = hospitalServicos.getPacienteServicos();
+        this.consultaServicos = hospitalServicos.getConsultaServicos();
+        this.medicoServicos = hospitalServicos.getMedicoServicos();
+        this.internacaoServicos = hospitalServicos.getInternacaoServicos();
     }
 
     
@@ -47,6 +54,9 @@ public class MenuPaciente {
                 case 4:
                     historicoConsultas(sc);
                     break;
+                case 5:
+                    quartoInternacao(sc);
+                    break;                
                 case 0:
                     System.out.println("Voltando ao menu principal...");
                     return;
@@ -63,7 +73,7 @@ public class MenuPaciente {
         System.out.println("1. Exibir Paciente");//
         System.out.println("2. Agendar Consulta");//
         System.out.println("3. Alterar Consulta");//
-        System.out.println("4. Historico de Consultas");
+        System.out.println("4. Historico de Consultas");//
         System.out.println("5. Quarto da internação");
         System.out.println("6. Historico de Internações");
         System.out.println(". Adicionar Plano de Saude");
@@ -96,7 +106,6 @@ public class MenuPaciente {
                 sc.nextLine();
             } 
             exibirMenuPaciente();
-            return;
         }
         else{
             System.out.println("\n"+pacienteServicos.getPaciente(cpf).toString());
@@ -108,7 +117,6 @@ public class MenuPaciente {
                 sc.nextLine();
             } 
             exibirMenuPaciente();
-            return;
         }
     }
 
@@ -283,7 +291,50 @@ public class MenuPaciente {
             }
             System.out.println("Fim do historico, voltando ao menu...");
             delay(1);
-        
         }
+    }
+
+    public void quartoInternacao(Scanner sc){
+        int idDaInternacao = -1;
+        System.out.println("Acessando consulta de quarto...");
+        System.out.println();
+        System.out.println("Digite o CPF do paciente desejado:");
+        String cpf = sc.nextLine();
+        System.out.println(cpf);
+        if(pacienteServicos.cpfCadastrado(cpf)==false){
+            System.out.println("\nCPF não cadastrado.");
+            System.out.println("\nPressione 0 para voltar.");
+            int voltar = 1;
+            while(voltar != 0){
+                voltar = sc.nextInt();
+                sc.nextLine();
+            }
+        }
+        
+        if(pacienteServicos.getPaciente(cpf).getNome().equals("")){
+            PacienteEspecial paciente = pacienteServicos.getPacienteEspecial(cpf);
+            for(Internacao internacao : paciente.getInternacoes()){
+                if(internacao.getDuracaoInternacao()<0){
+                    idDaInternacao = internacao.getIdInternacao();
+                    break;
+                }
+            }
+        }
+        else {
+            Paciente paciente = pacienteServicos.getPaciente(cpf);
+            for(Internacao internacao : paciente.getInternacoes()){
+                if(internacao.getDuracaoInternacao()<0){
+                    idDaInternacao = internacao.getIdInternacao();
+                    break;
+                }
+            }
+        }
+        if(idDaInternacao<0){
+            System.out.println("\nO paciente nao esta internado");
+            return;
+        }
+        System.out.println("\nQuarto da internação: "+internacaoServicos.getInternacao(idDaInternacao).getQuarto());
+        delay(1);
+
     }
 }
