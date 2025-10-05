@@ -73,8 +73,13 @@ public class InternacaoPersistencia {
                     LocalDate dataSaida = LocalDate.parse(dados[4], formatter);
                     double custoInternacao = Double.parseDouble(dados[5]);
                     int idInternacao = Integer.parseInt(dados[6]);
-                    Internacao internacaoLida = new Internacao(idInternacao,ps.getPaciente(cpf),ms.getMedico(crm),dataEntrada,dataSaida,quarto,custoInternacao);
-                    internacoes.add(internacaoLida);
+                    if(ps.getPaciente(cpf).getNome().equals("")){
+                        Internacao internacaoLida = new Internacao(idInternacao,ps.getPacienteEspecial(cpf),ms.getMedico(crm),dataEntrada,dataSaida,quarto,custoInternacao);
+                        internacoes.add(internacaoLida);
+                    }else {
+                        Internacao internacaoLida = new Internacao(idInternacao,ps.getPaciente(cpf),ms.getMedico(crm),dataEntrada,dataSaida,quarto,custoInternacao);
+                        internacoes.add(internacaoLida);
+                    }
                 }
                 else System.out.println("csv internacoes formatado incorretamente");
             }
