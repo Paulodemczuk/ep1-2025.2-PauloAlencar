@@ -103,4 +103,10 @@ public class Consulta {
         }
         else return medico.getCustoConsulta();
     }
+    public String getStatusString(){
+        if(status == 0)return "Agendada";
+        else if(status == 1)return "Concluida";
+        else if(status == 2)return "Cancelada";
+        else return "Desconhecido";
+    }
 }
