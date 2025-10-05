@@ -2,6 +2,7 @@ package Entidades;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public class Internacao {
     private Paciente paciente;
@@ -80,5 +81,17 @@ public class Internacao {
     public int getDuracaoInternacao(){
         Period diasInternacao = Period.between(dataEntrada, dataSaida);
         return diasInternacao.getDays();// retorna -1 se o paciente ainda esta internado
+    }
+
+    public String getDataEntradaFormatada(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataEntradaFormatada = dataEntrada.format(formatter);
+        return dataEntradaFormatada;
+    }
+
+    public String getDataSaidaFormatada(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataSaidaFormatada = dataSaida.format(formatter);
+        return dataSaidaFormatada;
     }
 }
