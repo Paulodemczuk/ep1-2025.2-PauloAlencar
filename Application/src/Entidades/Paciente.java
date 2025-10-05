@@ -48,4 +48,19 @@ public class Paciente extends Pessoa {
     public String toString(){
         return "---------------------\nNome: "+ this.getNome() +"\nIdade: "+ this.getIdade() + "\nCPF: " + this.getCpf() + "\n---------------------\n";
     }
+
+    public void printInternacoes(){
+        System.out.println();
+        for(Internacao internacao : internacoes){
+            System.out.println(internacao.getIdInternacao());
+            System.out.println(internacao.getMedico().getNome());
+            System.out.println(internacao.getPaciente().getNome());
+            System.out.println(internacao.getQuarto());
+            System.out.println(internacao.getDataEntradaFormatada());
+            System.out.println(internacao.getDataSaidaFormatada());
+            System.out.println(internacao.getDuracaoInternacao());
+            System.out.println(internacao.getCustoInternacao());
+            System.out.println();
+        }
+    }
 }
