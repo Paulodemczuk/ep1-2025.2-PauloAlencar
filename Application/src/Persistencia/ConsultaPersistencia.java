@@ -24,17 +24,18 @@ public class ConsultaPersistencia {
             caminhoArquivo = Paths.get("Application/dados/");
             Files.createDirectories(caminhoArquivo);
             try(BufferedWriter escritor = new BufferedWriter(new FileWriter(nomeArquivo))){
-                escritor.write("Local,Status,Paciente-CPF,Medico-CRM,Data-Hora,Diagnostico");
+                escritor.write("Local,Status,Paciente-CPF,Medico-CRM,Data-Hora,Diagnostico,Id da Consulta");
                 escritor.newLine();
                 
                 for(Consulta consulta : consultas){
-                    String linha = String.format("%s,%d,%s,%s,%s,%s", 
+                    String linha = String.format("%s,%d,%s,%s,%s,%s,%d", 
                     consulta.getLocal(),
                     consulta.getStatus(),
                     consulta.getPaciente().getCpf(),
                     consulta.getMedico().getCrm(),
                     consulta.getDataHoraFormatada(),
-                    consulta.getDiagnostico()
+                    consulta.getDiagnostico(),
+                    consulta.getIdConsulta()
                     );
                     escritor.write(linha);
                     escritor.newLine();
@@ -63,14 +64,15 @@ public class ConsultaPersistencia {
             leitor.readLine();
             while((linha = leitor.readLine()) != null){
                 String[] dados = linha.split(",");
-                if(dados.length == 6){
+                if(dados.length == 7){
                     String local = dados[0];
                     int status = Integer.parseInt(dados[1]);
                     String cpf = dados[2];
                     String crm = dados[3];
                     LocalDateTime datahora = LocalDateTime.parse(dados[4], formatter);
                     String diagnostico = dados[5];
-                    Consulta consultaLida = new Consulta(ps.getPaciente(cpf),ms.getMedico(crm),local,status,datahora,diagnostico);
+                    int idConsulta = Integer.parseInt(dados[6]);
+                    Consulta consultaLida = new Consulta(idConsulta,ps.getPaciente(cpf),ms.getMedico(crm),local,status,datahora,diagnostico);
                     consultas.add(consultaLida);
                 }
                 else System.out.println("csv consultas formatado incorretamente");

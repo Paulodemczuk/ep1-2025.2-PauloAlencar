@@ -17,7 +17,7 @@ public class ConsultaServicos {
         this.consultas = consultas;
     }
 
-    public int cadastrarConsulta(Paciente paciente, Medico medico, String local, int status, LocalDateTime dataHora){
+    public int cadastrarConsulta(int id, Paciente paciente, Medico medico, String local, int status, LocalDateTime dataHora){
         int dia = dataHora.getDayOfWeek().getValue() - 1;
         DateTimeFormatter formatacao = DateTimeFormatter.ofPattern("HH:mm");
         String horario = dataHora.format(formatacao);
@@ -41,7 +41,7 @@ public class ConsultaServicos {
             if(retorno == 1) return 1;
         }
         
-        Consulta consultaAgendada = new Consulta(paciente, medico, local, status, dataHora," ");
+        Consulta consultaAgendada = new Consulta(id, paciente, medico, local, status, dataHora," ");
         this.consultas.add(consultaAgendada);            
         return retorno; //0 se deu tudo certo , 1 se o medico possui consulta marcada para esse horario , 2 se o local ja esta agendado para esse horario, 3 se ambos estao indisponiveis e 4 se medico nao atende nesse horario
     }
@@ -84,6 +84,7 @@ public class ConsultaServicos {
 
     public void printConsultas(){
         for(Consulta consulta : consultas){
+            System.out.println(consulta.getIdConsulta());
             System.out.println(consulta.getMedico().getNome());
             System.out.println(consulta.getPaciente().getNome());
             System.out.println(consulta.getLocal());
@@ -95,5 +96,17 @@ public class ConsultaServicos {
 
     public void addConsulta(Consulta consulta){
         this.consultas.add(consulta);
+    }
+
+    public Consulta getConsulta(int id){
+        Consulta retorno = new Consulta();
+        for(Consulta consulta: consultas){
+            if(consulta.getIdConsulta() == id){
+                retorno = consulta;
+                break;
+            }
+        }
+        return retorno;
+    
     }
 }
