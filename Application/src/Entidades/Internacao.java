@@ -1,6 +1,7 @@
 package Entidades;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Internacao {
     private Paciente paciente;
@@ -14,6 +15,7 @@ public class Internacao {
         this.paciente = new Paciente();
         this.medico = new Medico();
         this.dataEntrada = LocalDate.now();
+        this.dataSaida = LocalDate.now().minusDays(1);
         this.quarto = 0;
         this.custoInternacao = 0;
     }
@@ -73,5 +75,10 @@ public class Internacao {
 
     public void setCustoInternacao(double custoInternacao) {
         this.custoInternacao = custoInternacao;
+    }
+
+    public int getDuracaoInternacao(){
+        Period diasInternacao = Period.between(dataEntrada, dataSaida);
+        return diasInternacao.getDays();// retorna -1 se o paciente ainda esta internado
     }
 }
