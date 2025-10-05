@@ -63,4 +63,20 @@ public class Paciente extends Pessoa {
             System.out.println();
         }
     }
+
+    public ArrayList<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void setConsultas(ArrayList<Consulta> consultas) {
+        this.consultas = consultas;
+    }
+
+    public ArrayList<Internacao> getInternacoes() {
+        return internacoes;
+    }
+
+    public void setInternacoes(ArrayList<Internacao> internacoes) {
+        this.internacoes = internacoes;
+    }
 }
