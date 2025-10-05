@@ -130,10 +130,17 @@ public class PacienteServicos {
     }
 
     public void printPacientesEspeciais(){
+        System.out.println();
         for(PacienteEspecial pacienteEspecial : pacientesEspeciais){
             System.out.println(pacienteEspecial.getNome());
             System.out.println(pacienteEspecial.getCpf());
             System.out.println(pacienteEspecial.getPlano().getNome());
+            System.out.println(pacienteEspecial.getPlano().getValorDesconto());
+            for(String especialidade : pacienteEspecial.getPlano().getEspecialidades()){
+                System.out.println(especialidade);
+            }
+            System.out.println();
+            
         }
     }
 
