@@ -78,5 +78,9 @@ public class InternacaoServicos {
         return retorno;
     
     }
+    public void removerInternacao(int id) {
+        this.internacoes.remove(getInternacao(id));
+        
+    }
 
 }

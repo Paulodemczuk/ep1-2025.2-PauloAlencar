@@ -79,4 +79,12 @@ public class Paciente extends Pessoa {
     public void setInternacoes(ArrayList<Internacao> internacoes) {
         this.internacoes = internacoes;
     }
+
+    public void removerInternacao(int id) {
+        for(Internacao internacao : internacoes){
+            if (internacao.getIdInternacao()==id){
+                this.internacoes.remove(internacao);
+            }
+        }        
+    }
 }
