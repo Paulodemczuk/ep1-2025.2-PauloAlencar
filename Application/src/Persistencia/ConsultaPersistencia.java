@@ -72,8 +72,13 @@ public class ConsultaPersistencia {
                     LocalDateTime datahora = LocalDateTime.parse(dados[4], formatter);
                     String diagnostico = dados[5];
                     int idConsulta = Integer.parseInt(dados[6]);
-                    Consulta consultaLida = new Consulta(idConsulta,ps.getPaciente(cpf),ms.getMedico(crm),local,status,datahora,diagnostico);
-                    consultas.add(consultaLida);
+                    if(ps.getPaciente(cpf).getNome().equals("")){
+                        Consulta consultaLida = new Consulta(idConsulta,ps.getPacienteEspecial(cpf),ms.getMedico(crm),local,status,datahora,diagnostico);
+                        consultas.add(consultaLida);
+                    }else {
+                        Consulta consultaLida = new Consulta(idConsulta,ps.getPaciente(cpf),ms.getMedico(crm),local,status,datahora,diagnostico);
+                        consultas.add(consultaLida);                        
+                    }
                 }
                 else System.out.println("csv consultas formatado incorretamente");
             }
