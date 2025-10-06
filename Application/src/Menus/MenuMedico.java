@@ -64,6 +64,7 @@ public class MenuMedico {
         System.out.println("3. Internar Paciente");//
         System.out.println("4. Alterar Internação");//
         System.out.println("5. Editar Agenda de Horarios");//
+        System.out.println("\n0.Voltar");
     }
 
     public void exibirMedico(Scanner sc){

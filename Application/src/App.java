@@ -12,12 +12,14 @@ public class App {
         hospitalPersistencia.carregarHospital(hospitalServicos);
 
         MenuPaciente menuPaciente = new MenuPaciente(hospitalServicos);
-        menuPrincipal(scanner,menuPaciente);
+        MenuMedico menuMedico = new MenuMedico(hospitalServicos);
+        MenuCadastro menuCadastro = new MenuCadastro(hospitalServicos);
+        menuPrincipal(scanner,menuPaciente,menuMedico,menuCadastro);
 
     
     }
 
-    public static void menuPrincipal(Scanner sc,MenuPaciente menuPaciente){
+    public static void menuPrincipal(Scanner sc,MenuPaciente menuPaciente,MenuMedico menuMedico, MenuCadastro menuCadastro){
         
         int menu = -1;
         while (menu != 0) {
@@ -29,12 +31,16 @@ public class App {
                     delay(1);
                     menuPaciente.acessarMenuPaciente(sc);
                     break;
-                case 2: 
-                    System.out.println("menu medico");
+                case 2:
+                    delay(1);
+                    menuMedico.acessarMenuMedico(sc);
                     break;
-                
-                
-                    case 0:
+
+                case 4:
+                    delay(1);
+                    menuCadastro.acessarMenuCadastro(sc);
+                    break;               
+                case 0:
                     System.out.println("Encerrando programa...");
                     break;
                 default:
@@ -45,6 +51,7 @@ public class App {
         //System.out.println("O menu escolhido foi: "+ menu);
     }
     public static void exibirMenuPrincipal(){
+        System.out.println();
         System.out.println("-----Menu principal------");
         System.out.println(Cores.YELLOW +"1. Menu Paciente"+Cores.RESET);
         System.out.println("2. Menu Medico");
