@@ -40,7 +40,7 @@ public class MenuMedico {
                     internarPaciente(sc);
                     break;
                 case 4:
-                    
+                    alterarInternacao(sc);
                     break;
                 case 5:
                     
@@ -64,9 +64,9 @@ public class MenuMedico {
         System.out.println("----- Menu Medico ------");
         System.out.println("1. Exibir Medico");//
         System.out.println("2. Alterar Consulta");//
-        System.out.println("3. Internar Paciente");
-        System.out.println("4. Cancelar Internação");
-        System.out.println("5. Alterar Agenda de Horarios");
+        System.out.println("3. Internar Paciente");//
+        System.out.println("4. Alterar Internação");
+        System.out.println("5. Editar Agenda de Horarios");
         System.out.println(". ");
         System.out.println(". ");
     }
@@ -229,6 +229,66 @@ public class MenuMedico {
         else {
             System.out.println("Erro ao cadastrar internação");
             delay(1);
+        }
+    }
+
+    public void alterarInternacao(Scanner sc){
+        System.out.println("\nDigite o id da internação: \n");
+        int id = sc.nextInt();
+        sc.nextLine();
+        if(internacaoServicos.getInternacao(id).getDuracaoInternacao() >= 0){
+            System.out.println("\nEssa internação ja foi concluida.");
+            System.out.println("\nPressione 0 para voltar.");
+            int voltar = 1;
+            while(voltar != 0){
+                voltar = sc.nextInt();
+                sc.nextLine();
+            }
+        }else if(internacaoServicos.getInternacao(id).getQuarto() == 0){
+            System.out.println("\nEssa internação nao existe.");
+            System.out.println("\nPressione 0 para voltar.");
+            int voltar = 1;
+            while(voltar != 0){
+                voltar = sc.nextInt();
+                sc.nextLine();
+            }
+        }
+        else{
+            System.out.printf("\nNome do paciente: %s\nNome do medico: %s\nQuarto : %d\nData de entrada: %s\nCusto diaria: %.2f\n", internacaoServicos.getInternacao(id).getPaciente().getNome(),internacaoServicos.getInternacao(id).getMedico().getNome(),internacaoServicos.getInternacao(id).getQuarto(),internacaoServicos.getInternacao(id).getDataEntradaFormatada(),internacaoServicos.getInternacao(id).getCustoInternacao());
+            delay(1);
+            System.out.println("\nDeseja concluir internação?");
+            int escolha = -1; 
+            delay(1);
+            while(escolha != 0){
+                System.out.println("1.Concluir \n2.Cancelar internação \n0.Manter internação.");
+                
+                escolha = sc.nextInt();
+                sc.nextLine();
+                switch (escolha){
+                    case 1:
+                        System.out.println("Digite o diagnostico: \n");
+                        String dataSaida = sc.nextLine();
+                        internacaoServicos.getInternacao(id).setDataSaida(dataSaida);
+                        System.out.println("\nInternação concluida e data de saida adicionada.");
+                        delay(1);
+                        return;
+                    case 2:
+                        internacaoServicos.getInternacao(id).getPaciente().removerInternacao(id);
+                        internacaoServicos.removerInternacao(id);
+                        System.out.println("\nInternação cancelada.");
+                        delay(1);
+                        return;
+                    
+                    case 0:
+                        System.out.println("Voltando ao menu...");
+                        delay(1);
+                        return;
+                    default:
+                        System.out.println("Escolha uma alternativa valida");
+                }
+
+            }
+
         }
     }
 }
