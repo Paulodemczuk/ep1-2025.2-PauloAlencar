@@ -15,6 +15,10 @@ public class appTeste {
         PacientesEspeciaisPercistencia pePersistencia = new PacientesEspeciaisPercistencia();
         PlanoPersistencia planoPersistencia = new PlanoPersistencia();
 
+        String crmteste1 = "32325";
+        String crmteste2 = "21345 SP";
+        String cpfteste1 = "123.321.982-20";
+        String cpfteste2 = "444.333.222-11";
         
         //planoPersistencia.salvarPlanos(planoServicos.getPlanosdeSaude());
         //mPersistencia.salvarMedicos(mServicos.getMedicos());
