@@ -43,10 +43,7 @@ public class MenuMedico {
                     alterarInternacao(sc);
                     break;
                 case 5:
-                    
-                    break;
-                case 6:
-                    
+                    editarAgenda(sc);
                     break;
                 case 0:
                     System.out.println("Voltando ao menu principal...");
@@ -65,10 +62,8 @@ public class MenuMedico {
         System.out.println("1. Exibir Medico");//
         System.out.println("2. Alterar Consulta");//
         System.out.println("3. Internar Paciente");//
-        System.out.println("4. Alterar Internação");
-        System.out.println("5. Editar Agenda de Horarios");
-        System.out.println(". ");
-        System.out.println(". ");
+        System.out.println("4. Alterar Internação");//
+        System.out.println("5. Editar Agenda de Horarios");//
     }
 
     public void exibirMedico(Scanner sc){
@@ -289,6 +284,60 @@ public class MenuMedico {
 
             }
 
+        }
+    }
+
+    public void editarAgenda(Scanner sc){
+        System.out.println("\nInternar paciente selecionado\n");
+        System.out.println("\nDigite seu CRM: ");
+        String crm = sc.nextLine();
+        System.out.println("\nSua agenda: ");
+        medicoServicos.getMedico(crm).exibirAgenda();
+        delay(1);
+        System.out.println();
+        int escolha = -1;
+        int dia;
+        String horario;
+        while (escolha != 0) {
+            System.out.println("1.Adicionar Horario 2.Remover horario 0.Voltar para o menu");
+            escolha = sc.nextInt();
+            sc.nextLine();
+            
+            switch (escolha){
+                case 1:
+                    System.out.println("Adicionar horario em qual dia da semana? \n");
+                    System.out.println("\n1.Segunda   2.Terça   3.Quarta   4.Quinta   5.Sexta   6.Sabado   7.Domingo");
+                    dia = sc.nextInt() - 1;
+                    sc.nextLine();
+                    System.out.println("Digite o horario desejado no formato (HH:mm): ");
+                    horario = sc.nextLine();
+                    medicoServicos.getMedico(crm).adicionarHorario(dia, horario);
+                    System.out.println("Horario adicionado!");
+                    delay(1);
+                    return;
+
+
+                case 2:
+                    System.out.println("Remover horario em qual dia da semana? \n");
+                    System.out.println("\n1.Segunda   2.Terça   3.Quarta   4.Quinta   5.Sexta   6.Sabado   7.Domingo");
+                    dia = sc.nextInt() - 1;
+                    sc.nextLine();
+                    System.out.println("\nDigite o horario desejado no formato (HH:mm): ");
+                    horario = sc.nextLine();
+                    medicoServicos.getMedico(crm).removerHorario(dia, horario);
+                    System.out.println("Horario removido!");
+                    delay(1);
+                    return;
+                
+                case 0:
+                    System.out.println("Voltando ao menu...");
+                    delay(1);
+                    return;
+                default:
+                    System.out.println("Escolha uma alternativa valida");
+                
+
+            }
         }
     }
 }
