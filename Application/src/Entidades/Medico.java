@@ -82,6 +82,10 @@ public class Medico extends Pessoa{
         agenda.get(dia).add(horario);
     }
 
+    public void removerHorario(int dia, String horario){
+        agenda.get(dia).remove(horario);
+    }
+
     public void adicionarHorarios(int dia, String horarios){
         String[] horario = horarios.split(" ");
         int quantidadeHorarios = horario.length;
