@@ -56,7 +56,10 @@ public class MenuPaciente {
                     break;
                 case 5:
                     quartoInternacao(sc);
-                    break;                
+                    break;
+                case 6:
+                    historicoInternacoes(sc);
+                    break;
                 case 0:
                     System.out.println("Voltando ao menu principal...");
                     return;
@@ -74,10 +77,10 @@ public class MenuPaciente {
         System.out.println("2. Agendar Consulta");//
         System.out.println("3. Alterar Consulta");//
         System.out.println("4. Historico de Consultas");//
-        System.out.println("5. Quarto da internação");
-        System.out.println("6. Historico de Internações");
+        System.out.println("5. Quarto da internação");//
+        System.out.println("6. Historico de Internações");//
         System.out.println(". Adicionar Plano de Saude");
-        System.out.println(". Agendar Consulta para dependentes");
+        System.out.println("\n0.Voltar");
 
     }
 
@@ -335,6 +338,74 @@ public class MenuPaciente {
         }
         System.out.println("\nQuarto da internação: "+internacaoServicos.getInternacao(idDaInternacao).getQuarto());
         delay(1);
+    }
 
+    public void historicoInternacoes(Scanner sc){
+        int opcao;
+        System.out.println("Acessando Historico de Internações...");
+        delay(1);
+        System.out.println("\nDigite seu CPF: ");
+        String cpf = sc.nextLine();
+
+        if(pacienteServicos.cpfCadastrado(cpf) == false){
+            System.out.println("\nEsse CPF não está cadastrado!\n");
+            delay(1);
+            exibirMenuPaciente();
+            return;
+        }
+        if(pacienteServicos.getPaciente(cpf).getNome().equals("")){
+            PacienteEspecial paciente = pacienteServicos.getPacienteEspecial(cpf);
+            for(Internacao internacao : paciente.getInternacoes()){
+                delay(1);
+                System.out.println("\nid da internação: "+internacao.getIdInternacao());
+                System.out.println("Medico: "+internacao.getMedico().getNome());
+                System.out.println("Paciente: "+internacao.getPaciente().getNome());
+                System.out.println("Data de entrada: "+internacao.getDataEntradaFormatada());
+                if(!(internacao.getDuracaoInternacao()==-1)){
+                    System.out.println("Data de saida: "+internacao.getDataSaidaFormatada());
+                }else System.out.println("Data de saida: Ainda está internado");
+                System.out.println("Quarto: "+internacao.getQuarto());
+                System.out.println("Preço cheio da diaria: "+internacao.getCustoInternacao());
+                if(!(internacao.getDuracaoInternacao()==-1))System.out.println("Valor a pagar: "+internacao.valorInternaçao());
+                
+                System.out.println("\nPrecione 1 para continuar");
+                System.out.println("Precione 0 para sair");
+                opcao = sc.nextInt();
+                sc.nextLine();
+                if(opcao == 0){
+                    exibirMenuPaciente();
+                return;
+                }
+            }
+            System.out.println("Fim do historico, voltando ao menu...");
+            delay(1);
+        }
+        else {
+            Paciente paciente = pacienteServicos.getPaciente(cpf);
+            for(Internacao internacao : paciente.getInternacoes()){
+                delay(1);
+                System.out.println("\nid da internação: "+internacao.getIdInternacao());
+                System.out.println("Medico: "+internacao.getMedico().getNome());
+                System.out.println("Paciente: "+internacao.getPaciente().getNome());
+                System.out.println("Data de entrada: "+internacao.getDataEntradaFormatada());
+                if(!(internacao.getDuracaoInternacao()==-1)){
+                    System.out.println("Data de saida: "+internacao.getDataSaidaFormatada());
+                }else System.out.println("Data de saida: Ainda está internado");
+                System.out.println("Quarto: "+internacao.getQuarto());
+                System.out.println("Preço cheio da diaria: "+internacao.getCustoInternacao());
+                if(!(internacao.getDuracaoInternacao()==-1))System.out.println("Valor a pagar: "+internacao.valorInternaçao());
+                
+                System.out.println("\nPrecione 1 para continuar");
+                System.out.println("Precione 0 para sair");
+                opcao = sc.nextInt();
+                sc.nextLine();
+                if(opcao == 0){
+                    exibirMenuPaciente();
+                return;
+                }
+            }
+            System.out.println("Fim do historico, voltando ao menu...");
+            delay(1);
+        }
     }
 }
