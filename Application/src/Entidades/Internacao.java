@@ -105,4 +105,14 @@ public class Internacao {
     public void setIdInternacao(int idInternacao) {
         this.idInternacao = idInternacao;
     }
+
+    public double valorInternaçao(){
+        if(this.getDuracaoInternacao()==-1)return 0.00;
+        double desconto= 1;
+        if(paciente instanceof PacienteEspecial){
+            desconto = ((PacienteEspecial)paciente).getPlano().getValorDesconto();
+        }
+        double valorPagar = (getCustoInternacao()*getDuracaoInternacao())*desconto;
+        return valorPagar;
+    }
 }
