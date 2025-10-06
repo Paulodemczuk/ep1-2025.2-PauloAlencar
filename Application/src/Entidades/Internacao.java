@@ -65,6 +65,12 @@ public class Internacao {
         this.dataSaida = dataSaida;
     }
 
+    public void setDataSaida(String dataSaidaFormatada) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate datasaida = LocalDate.parse(dataSaidaFormatada, formatter);
+        this.dataSaida = datasaida;
+    }
+
     public int getQuarto() {
         return quarto;
     }
