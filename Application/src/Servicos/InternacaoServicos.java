@@ -18,9 +18,11 @@ public class InternacaoServicos {
 
     public boolean cadastrarInternacao(int id, Paciente paciente, Medico medico, LocalDate dataEntrada, LocalDate dataSaida, int quarto, double custoInternacao){
         for(Internacao internacao : internacoes){
-            if(internacao.getQuarto() == quarto){
-                System.out.println("quato ocupado");
-                return false;
+            if(internacao.getDuracaoInternacao() < 0){
+                if(internacao.getQuarto() == quarto){
+                    System.out.println("quato ocupado");
+                    return false;
+                }
             }
         }
         Internacao internacao = new Internacao(id, paciente, medico, dataEntrada, dataSaida, quarto, custoInternacao);
@@ -30,9 +32,11 @@ public class InternacaoServicos {
 
     public boolean cadastrarInternacao(Internacao novaInternacao){
         for(Internacao internacao : internacoes){
-            if(internacao.getQuarto() == novaInternacao.getQuarto()){
-                System.out.println("quato ocupado");
-                return false;
+            if(internacao.getDuracaoInternacao() < 0){
+                if(internacao.getQuarto() == novaInternacao.getQuarto()){
+                    System.out.println("quato ocupado");
+                    return false;
+                }
             }
         }
         this.internacoes.add(novaInternacao);
