@@ -1,7 +1,11 @@
 package Menus;
 
+import Entidades.Medico;
+import Entidades.Paciente;
 import static Menus.Cores.delay;
 import Servicos.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class MenuMedico {
@@ -33,7 +37,7 @@ public class MenuMedico {
                     alterarConsulta(sc);
                     break;
                 case 3:
-                    
+                    internarPaciente(sc);
                     break;
                 case 4:
                     
@@ -58,8 +62,8 @@ public class MenuMedico {
     static public void exibirMenuMedico(){
         System.out.println();
         System.out.println("----- Menu Medico ------");
-        System.out.println("1. Exibir Medico");
-        System.out.println("2. Alterar Consulta");
+        System.out.println("1. Exibir Medico");//
+        System.out.println("2. Alterar Consulta");//
         System.out.println("3. Internar Paciente");
         System.out.println("4. Cancelar Internação");
         System.out.println("5. Alterar Agenda de Horarios");
@@ -161,5 +165,70 @@ public class MenuMedico {
 
         }
         
+    }
+
+    public void internarPaciente(Scanner sc){
+        int id;
+        Paciente paciente = new Paciente();
+        Medico medico;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataEntrada = LocalDate.now();
+        int correto = 2;
+        String cpf;
+        String crm = "";
+        int quarto = 0;
+        double custoInternacao = 0;
+
+        //Internacao(int idInternacao,Paciente paciente, Medico medico, LocalDate dataEntrada, = nullLocalDate dataSaida, int quarto, double custoInternacao);
+
+        
+
+        while(correto == 2){
+            System.out.println("\nInternar paciente selecionado\n");
+            System.out.println("\nDigite seu CRM: ");
+            crm = sc.nextLine();
+            System.out.println("Digite o CPF do paciente: \n");
+            cpf = sc.nextLine();
+            System.out.println("\nDigite o quarto desejado para a internação: ");
+            quarto = sc.nextInt();
+            sc.nextLine();
+            System.out.println("\nDigite a data da internação (Siga o formato 'dd/MM/yyyy'): ");
+            String dataHoraFormatada = sc.nextLine();
+            dataEntrada = LocalDate.parse(dataHoraFormatada,formatter);
+            if(paciente.getNome().equals(pacienteServicos.getPaciente(cpf).getNome())){
+                paciente = pacienteServicos.getPacienteEspecial(cpf);
+            }else paciente = pacienteServicos.getPaciente(cpf);
+            System.out.println("Digite o custo da diaria de internação: ");
+            custoInternacao = sc.nextDouble();
+            System.out.println("\nAs informações estão corretas?");
+            System.out.printf("\nNome do paciente: %s\nNome do medico: %s\nQuarto : %d\nData de entrada: %s\nCusto diaria: %.2f\n", paciente.getNome(),medicoServicos.getMedico(crm).getNome(),quarto,dataHoraFormatada,custoInternacao);        
+            System.out.println("\n1.Sim 2.Não 0.Voltar");
+            correto = sc.nextInt();
+            sc.nextLine();
+        }
+        if(correto == 0){
+            exibirMenuMedico();
+            return;
+        }
+        
+        id = internacaoServicos.getInternacoes().size()+1;
+        
+        medico = medicoServicos.getMedico(crm);
+        boolean retorno = internacaoServicos.cadastrarInternacao(id, paciente, medico, dataEntrada, dataEntrada, quarto, custoInternacao);
+        
+        if(retorno == false){
+            System.out.println("O quarto está ocupado");
+            delay(1);
+            
+        }
+        else if (retorno == true){
+            System.out.println("Internação cadastrada.");
+            delay(1);
+        
+        }
+        else {
+            System.out.println("Erro ao cadastrar internação");
+            delay(1);
+        }
     }
 }
