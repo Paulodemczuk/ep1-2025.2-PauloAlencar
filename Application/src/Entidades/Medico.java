@@ -91,6 +91,7 @@ public class Medico extends Pessoa{
     }
 
     public void exibirAgenda(){
+        System.out.println();
         for(int i = 0;i<7;i++){
             String dia = agenda.get(i).get(0);
             System.out.print(dia + ": ");
@@ -125,6 +126,7 @@ public class Medico extends Pessoa{
 
     @Override
     public void printInformacoes(){
+        System.out.println();
         System.out.println("----------------------");
         System.out.println("nome:"+ this.getNome());
         System.out.println("idade:"+ this.getIdade());
