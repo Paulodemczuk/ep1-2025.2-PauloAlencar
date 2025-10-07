@@ -110,4 +110,10 @@ public class Consulta {
         else if(status == 2)return "Cancelada";
         else return "Desconhecido";
     }
+
+    @Override
+    public String toString() {
+        String consultaString = String.format("Status: %s Nome do paciente: %s Nome do medico: %s Local da consulta: %s Data e hora: %s",getStatusString(), paciente.getNome(),medico.getNome(),local,getDataHoraFormatada());
+        return consultaString;
+    }
 }
