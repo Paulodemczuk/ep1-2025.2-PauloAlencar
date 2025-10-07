@@ -98,6 +98,7 @@ public class Consulta {
                     break;
                 }
             }
+            if((paciente.getIdade()) >= 60)desconto -= 0.1;
             aPagar = medico.getCustoConsulta() * desconto;
             return aPagar;
         }

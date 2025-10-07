@@ -113,10 +113,19 @@ public class Internacao {
     }
 
     public double valorInternaçao(){
-        if(this.getDuracaoInternacao()==-1)return 0.00;
-        double desconto= 1;
+        if(this.getDuracaoInternacao() == -1)return 0.00;
+        double desconto = 1;
         if(paciente instanceof PacienteEspecial){
+            
             desconto = ((PacienteEspecial)paciente).getPlano().getValorDesconto();
+            if((paciente.getIdade()) >= 60)desconto -= 0.1;
+            PlanodeSaude plano = ((PacienteEspecial)paciente).getPlano();
+            
+            for(String especialidade : plano.getEspecialidades()){
+                if((especialidade.equals("Internacao")) && (this.getDuracaoInternacao() < 8)){
+                    desconto = 0;
+                }
+            }
         }
         double valorPagar = (getCustoInternacao()*getDuracaoInternacao())*desconto;
         return valorPagar;
