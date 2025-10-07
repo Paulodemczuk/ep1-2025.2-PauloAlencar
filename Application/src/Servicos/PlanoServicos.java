@@ -57,4 +57,14 @@ public class PlanoServicos {
             System.out.println();
         }
     }
+
+    public PlanodeSaude getPlanodeSaude(String nomePlano){
+        for(PlanodeSaude planodeSaude : planosdeSaude){
+            if(planodeSaude.getNome().equals(nomePlano)){
+                
+                return planodeSaude;
+            }
+        }
+        return new PlanodeSaude();
+    }
 }
