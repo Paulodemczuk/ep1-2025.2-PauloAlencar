@@ -3,6 +3,7 @@ package Menus;
 import Entidades.*;
 import static Menus.Cores.delay;
 import Servicos.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuCadastro {
@@ -104,7 +105,7 @@ public class MenuCadastro {
     }
 
     public void cadastrarMedico(Scanner sc){
-         System.out.println("Cadastrar medico...");
+        System.out.println("Cadastrar medico...");
         delay(1);
         System.out.println("\nDigite o nome: ");
         String nome = sc.nextLine();
@@ -130,9 +131,41 @@ public class MenuCadastro {
     }
     
     public void cadastrarPlanodeSaude(Scanner sc){
-
-
-
-        PlanodeSaude plano = new PlanodeSaude(null, 0, null);
+        System.out.println("\nCadastrar plano de saude...");
+        delay(1);
+        System.out.println("\nDigite o nome do plano de saude:");
+        String nomePlano = sc.nextLine();
+        if(planoServicos.getPlanodeSaude(nomePlano).getNome().equals(nomePlano)){
+            System.out.println("\nEsse esse nome ja esta cadastrado.");
+            delay(1);
+            return;
+        }
+        System.out.println("\nDigite o valor de desconto (Em porcentagem sem incluir '%'):");
+        double valorDesconto = 1 - (sc.nextDouble()/100);
+        sc.nextLine();
+        ArrayList<String> especialidades = new ArrayList<>();
+        System.out.println("\nDeseja incluir o beneficio de internações com duração de uma semana ou menos gratuitas?");
+        System.out.println("1.Sim 2.Não");
+        int opcao = sc.nextInt();
+        sc.nextLine();
+        if(opcao == 1){
+            especialidades.add("Internacao");
+        }
+        System.out.println("\nDeseja incluir descontos para especialidades especificas?");
+        System.out.println("1.Sim 2.Não");
+        opcao = sc.nextInt();
+        sc.nextLine();
+        while(opcao==1){
+            System.out.println("\nDigite a especialidade desejada:");
+            especialidades.add(sc.nextLine());
+            System.out.println("\nDeseja incluir mais especialidades?");
+            System.out.println("1.Sim 2.Não");
+            opcao = sc.nextInt();
+            sc.nextLine();            
+        }
+        PlanodeSaude plano = new PlanodeSaude(nomePlano, valorDesconto, especialidades);
+        planoServicos.cadastrarPlano(plano);
+        System.out.println("\nPlano cadastrado!");
+        delay(1);
     }
 }
