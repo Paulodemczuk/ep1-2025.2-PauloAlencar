@@ -10,17 +10,17 @@ public class App {
         HospitalPersistencia hospitalPersistencia = new HospitalPersistencia();
         HospitalServicos hospitalServicos = new HospitalServicos();
         hospitalPersistencia.carregarHospital(hospitalServicos);
-
         MenuPaciente menuPaciente = new MenuPaciente(hospitalServicos);
         MenuMedico menuMedico = new MenuMedico(hospitalServicos);
         MenuRelatorio menuRelatorio = new MenuRelatorio(hospitalServicos);
         MenuCadastro menuCadastro = new MenuCadastro(hospitalServicos);
-        menuPrincipal(scanner,menuPaciente,menuMedico,menuCadastro,menuRelatorio);
+
+        menuPrincipal(scanner,menuPaciente,menuMedico,menuCadastro,menuRelatorio,hospitalPersistencia,hospitalServicos);
 
     
     }
 
-    public static void menuPrincipal(Scanner sc,MenuPaciente menuPaciente,MenuMedico menuMedico, MenuCadastro menuCadastro, MenuRelatorio menuRelatorio){
+    public static void menuPrincipal(Scanner sc,MenuPaciente menuPaciente,MenuMedico menuMedico, MenuCadastro menuCadastro, MenuRelatorio menuRelatorio,HospitalPersistencia hospitalPersistencia,HospitalServicos hospitalServicos){
         
         int menu = -1;
         while (menu != 0) {
@@ -42,9 +42,13 @@ public class App {
                 case 4:
                     delay(1);
                     menuCadastro.acessarMenuCadastro(sc);
+                    break;
+                case 9:
+                    System.out.println("Encerrando sem salvar...");
                     break;               
                 case 0:
-                    System.out.println("Encerrando programa...");
+                    System.out.println("Salvando dados e encerrando programa...");
+                    hospitalPersistencia.salvarHospital(hospitalServicos);
                     break;
                 default:
                     System.out.println("\nEscolha uma alternativa valida");
@@ -60,5 +64,8 @@ public class App {
         System.out.println("2. Menu Medico");
         System.out.println("3. Menu Relatórios");
         System.out.println("4. Menu Cadastramento");
+        System.out.println();
+        System.out.println("9.Sair sem salvar");
+        System.out.println("0.Salvar e sair");
     }
 }
