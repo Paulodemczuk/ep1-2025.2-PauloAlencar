@@ -13,13 +13,14 @@ public class App {
 
         MenuPaciente menuPaciente = new MenuPaciente(hospitalServicos);
         MenuMedico menuMedico = new MenuMedico(hospitalServicos);
+        MenuRelatorio menuRelatorio = new MenuRelatorio(hospitalServicos);
         MenuCadastro menuCadastro = new MenuCadastro(hospitalServicos);
-        menuPrincipal(scanner,menuPaciente,menuMedico,menuCadastro);
+        menuPrincipal(scanner,menuPaciente,menuMedico,menuCadastro,menuRelatorio);
 
     
     }
 
-    public static void menuPrincipal(Scanner sc,MenuPaciente menuPaciente,MenuMedico menuMedico, MenuCadastro menuCadastro){
+    public static void menuPrincipal(Scanner sc,MenuPaciente menuPaciente,MenuMedico menuMedico, MenuCadastro menuCadastro, MenuRelatorio menuRelatorio){
         
         int menu = -1;
         while (menu != 0) {
@@ -35,7 +36,9 @@ public class App {
                     delay(1);
                     menuMedico.acessarMenuMedico(sc);
                     break;
-
+                case 3:
+                    delay(1);
+                    menuRelatorio.acessarMenuRelatorio(sc);
                 case 4:
                     delay(1);
                     menuCadastro.acessarMenuCadastro(sc);
@@ -44,7 +47,7 @@ public class App {
                     System.out.println("Encerrando programa...");
                     break;
                 default:
-                    System.out.println("Escolha uma alternativa valida");
+                    System.out.println("\nEscolha uma alternativa valida");
                     delay(1);
             }            
         }
