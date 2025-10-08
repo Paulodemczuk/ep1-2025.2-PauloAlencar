@@ -1,5 +1,6 @@
 import Menus.*;
 import static Menus.Cores.delay;
+import static Menus.Cores.limparTela;
 import Persistencia.HospitalPersistencia;
 import Servicos.HospitalServicos;
 import java.util.Scanner;
@@ -23,7 +24,7 @@ public class App {
     public static void menuPrincipal(Scanner sc,MenuPaciente menuPaciente,MenuMedico menuMedico, MenuCadastro menuCadastro, MenuRelatorio menuRelatorio,HospitalPersistencia hospitalPersistencia,HospitalServicos hospitalServicos){
         
         int menu = -1;
-        while (menu != 0) {
+        while (menu != 0 && menu!=9) {
             exibirMenuPrincipal(); 
             menu = sc.nextInt();
             sc.nextLine();
@@ -39,6 +40,7 @@ public class App {
                 case 3:
                     delay(1);
                     menuRelatorio.acessarMenuRelatorio(sc);
+                    break;
                 case 4:
                     delay(1);
                     menuCadastro.acessarMenuCadastro(sc);
@@ -58,14 +60,18 @@ public class App {
         //System.out.println("O menu escolhido foi: "+ menu);
     }
     public static void exibirMenuPrincipal(){
+        limparTela();
         System.out.println();
-        System.out.println("-----Menu principal------");
-        System.out.println(Cores.YELLOW +"1. Menu Paciente"+Cores.RESET);
-        System.out.println("2. Menu Medico");
-        System.out.println("3. Menu Relatórios");
-        System.out.println("4. Menu Cadastramento");
-        System.out.println();
-        System.out.println("9.Sair sem salvar");
-        System.out.println("0.Salvar e sair");
+        System.out.println(Cores.CYAN+"+------------------------+"+Cores.RESET);
+        System.out.println(Cores.CYAN+"|"+Cores.RESET+"     Menu Principal     "+Cores.CYAN+"|");
+        System.out.println(Cores.CYAN+"+------------------------+" + Cores.RESET);
+        System.out.println(Cores.CYAN+"|"+Cores.RESET+ "  1. Menu Paciente      "+Cores.CYAN+"|"+Cores.RESET);
+        System.out.println(Cores.CYAN+"|"+Cores.RESET+ "  2. Menu Medico        "+Cores.CYAN+"|"+Cores.RESET);
+        System.out.println(Cores.CYAN+"|"+Cores.RESET+ "  3. Menu Relatórios    "+Cores.CYAN+"|"+Cores.RESET);
+        System.out.println(Cores.CYAN+"|"+Cores.RESET+ "  4. Menu Cadastramento "+Cores.CYAN+"|"+Cores.RESET);
+        System.out.println(Cores.CYAN+"|"+Cores.RESET+ "                        "+Cores.CYAN+"|"+Cores.RESET);
+        System.out.println(Cores.CYAN+"|"+Cores.RESET+ "  9. Sair sem salvar    "+Cores.CYAN+"|"+Cores.RESET);
+        System.out.println(Cores.CYAN+"|"+Cores.RESET+ "  0. Salvar e sair      "+Cores.CYAN+"|"+Cores.RESET);
+        System.out.println(Cores.CYAN+"+------------------------+" + Cores.RESET);
     }
 }

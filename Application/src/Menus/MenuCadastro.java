@@ -2,6 +2,7 @@ package Menus;
 
 import Entidades.*;
 import static Menus.Cores.delay;
+import static Menus.Cores.limparTela;
 import Servicos.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -43,22 +44,27 @@ public class MenuCadastro {
                     
                     break;
                 case 0:
-                    System.out.println("Voltando ao menu principal...");
+                    System.out.println("\nVoltando ao menu principal...");
                     return;
                 default:
-                    System.out.println("Escolha uma alternativa valida");
+                    System.out.println("\nEscolha uma alternativa valida");
             }
 
         }
     }
 
     public void exibirMenuCadastro(){
+        limparTela();
         System.out.println();
-        System.out.println("----- Menu Cadastro ------");
-        System.out.println("1. Cadastrar Paciente");
-        System.out.println("2. Cadastrar Médico");
-        System.out.println("3. Cadastrar Plano de Saude");
-        System.out.println("\n0.Voltar");            
+        System.out.println(Cores.YELLOW +"+-------------------------------+"+Cores.RESET);
+        System.out.println(Cores.YELLOW+"|"+Cores.RESET+"         Menu Cadastro         "+ Cores.YELLOW+"|"+Cores.RESET);
+        System.out.println(Cores.YELLOW +"+-------------------------------+"+Cores.RESET);
+        System.out.println(Cores.YELLOW+"|"+Cores.RESET+"  1. Cadastrar Paciente        "+ Cores.YELLOW+"|"+Cores.RESET);
+        System.out.println(Cores.YELLOW+"|"+Cores.RESET+"  2. Cadastrar Médico          "+ Cores.YELLOW+"|"+Cores.RESET);
+        System.out.println(Cores.YELLOW+"|"+Cores.RESET+"  3. Cadastrar Plano de Saude  "+ Cores.YELLOW+"|"+Cores.RESET);
+        System.out.println(Cores.YELLOW+"|"+Cores.RESET+"                               "+ Cores.YELLOW+"|"+Cores.RESET);
+        System.out.println(Cores.YELLOW+"|"+Cores.RESET+"  0.Voltar                     "+ Cores.YELLOW+"|"+Cores.RESET);
+        System.out.println(Cores.YELLOW +"+-------------------------------+"+Cores.RESET);            
     }
 
     public void cadastrarPaciente(Scanner sc){
@@ -69,7 +75,7 @@ public class MenuCadastro {
         System.out.println("\nDigite o CPF: ");
         String cpf = sc.nextLine();
         if(pacienteServicos.cpfCadastrado(cpf)==true){
-            System.out.println("Esse cpf ja esta cadastrado!");
+            System.out.println("["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Esse cpf ja esta cadastrado!");
             delay(1);
             return;
         }
@@ -83,24 +89,24 @@ public class MenuCadastro {
         if(possuiPlano==2){
             Paciente paciente = new Paciente(nome, idade, cpf);
             pacienteServicos.addPaciente(paciente);
-            System.out.println("\nPaciente adicionado!");
+            System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Paciente adicionado!");
             
         }
         else if(possuiPlano == 1){
             System.out.println("\nDigite o nome do Plano:");
             String nomePlano = sc.nextLine();
             if(planoServicos.getPlanodeSaude(nomePlano).getNome().equals("")){
-                System.out.println("\nEsse plano de saude nao esta cadastrado.");
+                System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+ "Esse plano de saude nao esta cadastrado.");
                 delay(1);
                 return;
             }
             PacienteEspecial pacienteEspecial = new PacienteEspecial(planoServicos.getPlanodeSaude(nomePlano), nome, idade, cpf);
             pacienteServicos.addPacienteEspecial(pacienteEspecial);
-            System.out.println("\nPaciente especial cadastrado!");
+            System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Paciente especial cadastrado!");
             
         }
         else {
-            System.out.println("\nOpção invalida!");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+ "Opção invalida!");
         }
     }
 
@@ -117,7 +123,7 @@ public class MenuCadastro {
         double custoConsulta = sc.nextDouble();
         sc.nextLine();
         if(medicoServicos.crmCadastrado(crm)==true){
-            System.out.println("Esse CRM ja esta cadastrado!");
+            System.out.println("["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Esse CRM ja esta cadastrado!");
             delay(1);
             return;
         }
@@ -126,7 +132,7 @@ public class MenuCadastro {
         sc.nextLine();
         Medico medico = new Medico(nome, idade, especialidade, crm, custoConsulta);
         medicoServicos.addMedico(medico);
-        System.out.println("\nMedico cadastrado!");
+        System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Medico cadastrado!");
         delay(1);
     }
     
@@ -136,7 +142,7 @@ public class MenuCadastro {
         System.out.println("\nDigite o nome do plano de saude:");
         String nomePlano = sc.nextLine();
         if(planoServicos.getPlanodeSaude(nomePlano).getNome().equals(nomePlano)){
-            System.out.println("\nEsse esse nome ja esta cadastrado.");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Esse esse nome ja esta cadastrado.");
             delay(1);
             return;
         }
@@ -165,7 +171,7 @@ public class MenuCadastro {
         }
         PlanodeSaude plano = new PlanodeSaude(nomePlano, valorDesconto, especialidades);
         planoServicos.cadastrarPlano(plano);
-        System.out.println("\nPlano cadastrado!");
+        System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Plano cadastrado!");
         delay(1);
     }
 }

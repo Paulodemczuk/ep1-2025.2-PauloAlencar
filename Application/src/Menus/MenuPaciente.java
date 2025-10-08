@@ -2,6 +2,7 @@ package Menus;
 
 import Entidades.*;
 import static Menus.Cores.delay;
+import static Menus.Cores.limparTela;
 import Servicos.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -61,26 +62,30 @@ public class MenuPaciente {
                     historicoInternacoes(sc);
                     break;
                 case 0:
-                    System.out.println("Voltando ao menu principal...");
+                    System.out.println("\nVoltando ao menu principal...");
                     return;
                 default:
-                    System.out.println("Escolha uma alternativa valida");
+                    System.out.println("\nEscolha uma alternativa valida");
             }
 
         }
     }
 
     public void exibirMenuPaciente(){
+        limparTela();
         System.out.println();
-        System.out.println("-----Menu Paciente------");
-        System.out.println("1. Exibir Paciente");//
-        System.out.println("2. Agendar Consulta");//
-        System.out.println("3. Alterar Consulta");//
-        System.out.println("4. Historico de Consultas");//
-        System.out.println("5. Quarto da internação");//
-        System.out.println("6. Historico de Internações");//
-        System.out.println(". Adicionar Plano de Saude");
-        System.out.println("\n0.Voltar");
+        System.out.println(Cores.GREEN+"+-------------------------------+"+Cores.RESET);
+        System.out.println(Cores.GREEN+"|"+Cores.RESET+"         Menu Paciente         "+Cores.GREEN+"|"+Cores.RESET);
+        System.out.println(Cores.GREEN+"+-------------------------------+"+Cores.RESET);
+        System.out.println(Cores.GREEN+"|"+Cores.RESET+"  1. Exibir Paciente           "+Cores.GREEN+"|"+Cores.RESET);
+        System.out.println(Cores.GREEN+"|"+Cores.RESET+"  2. Agendar Consulta          "+Cores.GREEN+"|"+Cores.RESET);
+        System.out.println(Cores.GREEN+"|"+Cores.RESET+"  3. Alterar Consulta          "+Cores.GREEN+"|"+Cores.RESET);
+        System.out.println(Cores.GREEN+"|"+Cores.RESET+"  4. Historico de Consultas    "+Cores.GREEN+"|"+Cores.RESET);
+        System.out.println(Cores.GREEN+"|"+Cores.RESET+"  5. Quarto da internação      "+Cores.GREEN+"|"+Cores.RESET);
+        System.out.println(Cores.GREEN+"|"+Cores.RESET+"  6. Historico de Internações  "+Cores.GREEN+"|"+Cores.RESET);
+        System.out.println(Cores.GREEN+"|"+Cores.RESET+"                               "+Cores.GREEN+"|"+Cores.RESET);
+        System.out.println(Cores.GREEN+"|"+Cores.RESET+"  0.Voltar                     "+Cores.GREEN+"|"+Cores.RESET);
+        System.out.println(Cores.GREEN+"+-------------------------------+"+Cores.RESET);
 
     }
 
@@ -90,7 +95,7 @@ public class MenuPaciente {
         String cpf = sc.nextLine();
         System.out.println(cpf);
         if(pacienteServicos.cpfCadastrado(cpf)==false){
-            System.out.println("\nCPF não cadastrado.");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"CPF não cadastrado.");
             System.out.println("\nPressione 0 para voltar.");
             int voltar = 1;
             while(voltar != 0){
@@ -174,20 +179,20 @@ public class MenuPaciente {
                 System.out.println("O valor a pagar é de: "+precodaConsulta);
                 break;
             case 1:
-                System.out.println("O medico esta indisponivel neste horario");
+                System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O medico esta indisponivel neste horario");
                 break;
             case 2:
-                System.out.println("O local esta indisponivel neste horario");
+                System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O local esta indisponivel neste horario");
                 break;
             case 3:
-                System.out.println("O medico e o local estão indisponiveis neste horario");
+                System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O medico e o local estão indisponiveis neste horario");
                 break;
             case 4:
-                System.out.println("O medico não atende neste horario");
+                System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O medico não atende neste horario");
                 break;
         
             default:
-                System.out.println("Erro ao cadastrar consulta");
+                System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Erro ao cadastrar consulta");
                 break;
         }
     }
@@ -200,7 +205,7 @@ public class MenuPaciente {
         sc.nextLine();
         Consulta consultaAlterada = consultaServicos.getConsulta(id);
         if(consultaAlterada.getMedico().getNome().equals("")){
-            System.out.println("\n Esse id não existe!\n");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Esse id não existe!\n");
             alterarConsulta(sc);
         }
         System.out.println();
@@ -240,7 +245,7 @@ public class MenuPaciente {
         String cpf = sc.nextLine();
 
         if(pacienteServicos.cpfCadastrado(cpf) == false){
-            System.out.println("\nEsse CPF não está cadastrado!\n");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Esse CPF não está cadastrado!\n");
             delay(1);
             exibirMenuPaciente();
             return;
@@ -305,7 +310,7 @@ public class MenuPaciente {
         String cpf = sc.nextLine();
         System.out.println(cpf);
         if(pacienteServicos.cpfCadastrado(cpf)==false){
-            System.out.println("\nCPF não cadastrado.");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"CPF não cadastrado.");
             System.out.println("\nPressione 0 para voltar.");
             int voltar = 1;
             while(voltar != 0){
@@ -333,7 +338,7 @@ public class MenuPaciente {
             }
         }
         if(idDaInternacao<0){
-            System.out.println("\nO paciente nao esta internado");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O paciente nao esta internado");
             return;
         }
         System.out.println("\nQuarto da internação: "+internacaoServicos.getInternacao(idDaInternacao).getQuarto());
@@ -348,7 +353,7 @@ public class MenuPaciente {
         String cpf = sc.nextLine();
 
         if(pacienteServicos.cpfCadastrado(cpf) == false){
-            System.out.println("\nEsse CPF não está cadastrado!\n");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Esse CPF não está cadastrado!\n");
             delay(1);
             exibirMenuPaciente();
             return;

@@ -3,6 +3,7 @@ package Menus;
 import Entidades.Medico;
 import Entidades.Paciente;
 import static Menus.Cores.delay;
+import static Menus.Cores.limparTela;
 import Servicos.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -46,10 +47,10 @@ public class MenuMedico {
                     editarAgenda(sc);
                     break;
                 case 0:
-                    System.out.println("Voltando ao menu principal...");
+                    System.out.println("\nVoltando ao menu principal...");
                     return;
                 default:
-                    System.out.println("Escolha uma alternativa valida");
+                    System.out.println("\nEscolha uma alternativa valida");
             }
 
         }
@@ -57,14 +58,19 @@ public class MenuMedico {
 
 
     static public void exibirMenuMedico(){
+        limparTela();
         System.out.println();
-        System.out.println("----- Menu Medico ------");
-        System.out.println("1. Exibir Medico");//
-        System.out.println("2. Alterar Consulta");//
-        System.out.println("3. Internar Paciente");//
-        System.out.println("4. Alterar Internação");//
-        System.out.println("5. Editar Agenda de Horarios");//
-        System.out.println("\n0.Voltar");
+        System.out.println(Cores.RED +"+-------------------------------+"+Cores.RESET);
+        System.out.println(Cores.RED+"|"+Cores.RESET+"          Menu Médico          "+Cores.RED+"|"+Cores.RED);
+        System.out.println(Cores.RED +"+-------------------------------+"+Cores.RESET);
+        System.out.println(Cores.RED+"|"+Cores.RESET+"  1. Exibir Medico             "+ Cores.RED+"|"+Cores.RESET);
+        System.out.println(Cores.RED+"|"+Cores.RESET+"  2. Alterar Consulta          "+ Cores.RED+"|"+Cores.RESET);
+        System.out.println(Cores.RED+"|"+Cores.RESET+"  3. Internar Paciente         "+ Cores.RED+"|"+Cores.RESET);
+        System.out.println(Cores.RED+"|"+Cores.RESET+"  4. Alterar Internação        "+ Cores.RED+"|"+Cores.RESET);
+        System.out.println(Cores.RED+"|"+Cores.RESET+"  5. Editar Agenda de Horarios "+ Cores.RED+"|"+Cores.RESET);
+        System.out.println(Cores.RED+"|"+Cores.RESET+"                               "+Cores.RED+"|"+Cores.RESET);
+        System.out.println(Cores.RED+"|"+Cores.RESET+"  0. Voltar                    "+ Cores.RED+"|"+Cores.RESET);
+        System.out.println(Cores.RED +"+-------------------------------+"+Cores.RESET);
     }
 
     public void exibirMedico(Scanner sc){
@@ -73,7 +79,7 @@ public class MenuMedico {
         String crm = sc.nextLine();
         System.out.println(crm);
         if(medicoServicos.crmCadastrado(crm)==false){
-            System.out.println("\nCRM não cadastrado.");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"CRM não cadastrado.");
             System.out.println("\nPressione 0 para voltar.");
             int voltar = 1;
             while(voltar != 0){
@@ -101,7 +107,7 @@ public class MenuMedico {
         int id = sc.nextInt();
         sc.nextLine();
         if(consultaServicos.getConsulta(id).getStatus() == 1){
-            System.out.println("\nEssa consutla ja foi concluida.");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Essa consutla ja foi concluida.");
             System.out.println("\nPressione 0 para voltar.");
             int voltar = 1;
             while(voltar != 0){
@@ -110,7 +116,7 @@ public class MenuMedico {
             }
         }
         else if(consultaServicos.getConsulta(id).getStatus() == 2){
-            System.out.println("\nEssa consutla foi cancelada.");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Essa consutla foi cancelada.");
             System.out.println("\nPressione 0 para voltar.");
             int voltar = 1;
             while(voltar != 0){
@@ -132,7 +138,7 @@ public class MenuMedico {
                 switch (escolha){
                     case 1:
                         consultaServicos.getConsulta(id).setStatus(1);
-                        System.out.println("\nConsulta concluida!");
+                        System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Consulta concluida!");
                         delay(1);
                         return;
                     case 2:
@@ -140,12 +146,12 @@ public class MenuMedico {
                         System.out.println("Digite o diagnostico: \n");
                         String diagnostico = sc.nextLine();
                         consultaServicos.getConsulta(id).setDiagnostico(diagnostico);
-                        System.out.println("\nConsulta concluida e diagnostico adicionado!");
+                        System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Consulta concluida e diagnostico adicionado!");
                         delay(1);
                         return;
                     case 3:
                         consultaServicos.getConsulta(id).setStatus(2);
-                        System.out.println("\nConsulta cancelada!");
+                        System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Consulta cancelada!");
                         delay(1);
                         return;
                     
@@ -154,7 +160,7 @@ public class MenuMedico {
                         delay(1);
                         return;
                     default:
-                        System.out.println("Escolha uma alternativa valida");
+                        System.out.println("["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Escolha uma alternativa valida");
                 }
 
             }
@@ -175,7 +181,6 @@ public class MenuMedico {
         int quarto = 0;
         double custoInternacao = 0;
 
-        //Internacao(int idInternacao,Paciente paciente, Medico medico, LocalDate dataEntrada, = nullLocalDate dataSaida, int quarto, double custoInternacao);
 
         
 
@@ -213,17 +218,17 @@ public class MenuMedico {
         boolean retorno = internacaoServicos.cadastrarInternacao(id, paciente, medico, dataEntrada, dataEntrada, quarto, custoInternacao);
         
         if(retorno == false){
-            System.out.println("O quarto está ocupado");
+            System.out.println("["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O quarto está ocupado");
             delay(1);
             
         }
         else if (retorno == true){
-            System.out.println("Internação cadastrada.");
+            System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Internação cadastrada.");
             delay(1);
         
         }
         else {
-            System.out.println("Erro ao cadastrar internação");
+            System.out.println("["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Erro ao cadastrar internação");
             delay(1);
         }
     }
@@ -233,7 +238,7 @@ public class MenuMedico {
         int id = sc.nextInt();
         sc.nextLine();
         if(internacaoServicos.getInternacao(id).getDuracaoInternacao() >= 0){
-            System.out.println("\nEssa internação ja foi concluida.");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Essa internação ja foi concluida.");
             System.out.println("\nPressione 0 para voltar.");
             int voltar = 1;
             while(voltar != 0){
@@ -241,7 +246,7 @@ public class MenuMedico {
                 sc.nextLine();
             }
         }else if(internacaoServicos.getInternacao(id).getQuarto() == 0){
-            System.out.println("\nEssa internação nao existe.");
+            System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Essa internação nao existe.");
             System.out.println("\nPressione 0 para voltar.");
             int voltar = 1;
             while(voltar != 0){
@@ -262,16 +267,16 @@ public class MenuMedico {
                 sc.nextLine();
                 switch (escolha){
                     case 1:
-                        System.out.println("Digite o diagnostico: \n");
+                        System.out.println("Digite a data de saida (no formato 'dd/MM/yyyy'): \n");
                         String dataSaida = sc.nextLine();
                         internacaoServicos.getInternacao(id).setDataSaida(dataSaida);
-                        System.out.println("\nInternação concluida e data de saida adicionada.");
+                        System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Internação concluida e data de saida adicionada.");
                         delay(1);
                         return;
                     case 2:
                         internacaoServicos.getInternacao(id).getPaciente().removerInternacao(id);
                         internacaoServicos.removerInternacao(id);
-                        System.out.println("\nInternação cancelada.");
+                        System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Internação cancelada.");
                         delay(1);
                         return;
                     
@@ -280,7 +285,7 @@ public class MenuMedico {
                         delay(1);
                         return;
                     default:
-                        System.out.println("Escolha uma alternativa valida");
+                        System.out.println("["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Escolha uma alternativa valida");
                 }
 
             }
@@ -313,7 +318,7 @@ public class MenuMedico {
                     System.out.println("Digite o horario desejado no formato (HH:mm): ");
                     horario = sc.nextLine();
                     medicoServicos.getMedico(crm).adicionarHorario(dia, horario);
-                    System.out.println("Horario adicionado!");
+                    System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Horario adicionado!");
                     delay(1);
                     return;
 
@@ -326,7 +331,7 @@ public class MenuMedico {
                     System.out.println("\nDigite o horario desejado no formato (HH:mm): ");
                     horario = sc.nextLine();
                     medicoServicos.getMedico(crm).removerHorario(dia, horario);
-                    System.out.println("Horario removido!");
+                    System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Horario removido!");
                     delay(1);
                     return;
                 
@@ -335,7 +340,7 @@ public class MenuMedico {
                     delay(1);
                     return;
                 default:
-                    System.out.println("Escolha uma alternativa valida");
+                    System.out.println("["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Escolha uma alternativa valida");
                 
 
             }

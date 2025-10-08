@@ -2,6 +2,7 @@ package Menus;
 
 import Entidades.*;
 import static Menus.Cores.delay;
+import static Menus.Cores.limparTela;
 import Servicos.ConsultaServicos;
 import Servicos.HospitalServicos;
 import Servicos.InternacaoServicos;
@@ -56,24 +57,28 @@ public class MenuRelatorio {
                     
                     break;
                 case 0:
-                    System.out.println("Voltando ao menu principal...");
+                    System.out.println("\nVoltando ao menu principal...");
                     return;
                 default:
-                    System.out.println("Escolha uma alternativa valida");
+                    System.out.println("\nEscolha uma alternativa valida");
             }
 
         }
     }
 
     public void exibirMenuRelatorio(){
+        limparTela();
         System.out.println();
-        System.out.println("----- Menu Relatorios ------");
-        System.out.println("1. Pacientes cadastrados");
-        System.out.println("2. Médicos cadastrados");
-        System.out.println("3. Consultas futuras e passadas");
-        System.out.println("4. Pacientes internados");
-
-        System.out.println("\n0.Voltar"); 
+        System.out.println(Cores.MAGENTA +"+-----------------------------------+"+Cores.RESET);
+        System.out.println(Cores.MAGENTA+"|"+Cores.RESET+"          Menu Relatorios          "+Cores.MAGENTA+"|"+Cores.RESET);
+        System.out.println(Cores.MAGENTA +"+-----------------------------------+"+Cores.RESET);
+        System.out.println(Cores.MAGENTA+"|"+Cores.RESET+"  1. Pacientes cadastrados         "+Cores.MAGENTA+"|"+Cores.RESET);
+        System.out.println(Cores.MAGENTA+"|"+Cores.RESET+"  2. Médicos cadastrados           "+Cores.MAGENTA+"|"+Cores.RESET);
+        System.out.println(Cores.MAGENTA+"|"+Cores.RESET+"  3. Consultas futuras e passadas  "+Cores.MAGENTA+"|"+Cores.RESET);
+        System.out.println(Cores.MAGENTA+"|"+Cores.RESET+"  4. Pacientes internados          "+Cores.MAGENTA+"|"+Cores.RESET);
+        System.out.println(Cores.MAGENTA+"|"+Cores.RESET+"                                   "+Cores.MAGENTA+"|"+Cores.RESET);
+        System.out.println(Cores.MAGENTA+"|"+Cores.RESET+"  0.Voltar                         "+Cores.MAGENTA+"|"+Cores.RESET); 
+        System.out.println(Cores.MAGENTA +"+-----------------------------------+"+Cores.RESET);
     }
 
     public void pacientesCadastrados(Scanner sc){
