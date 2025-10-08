@@ -23,6 +23,11 @@ public class PacienteEspecial extends Paciente{
 
     @Override
     public String toString(){
-        return "---------------------\nNome: "+ this.getNome() +"\nIdade: "+ this.getIdade() + "\nCPF: " + this.getCpf() + "\nPlano: "+ this.getPlano().getNome() + "\n---------------------\n";
+        return "Nome: "+ this.getNome() +" ; Idade: "+ this.getIdade() + " ; CPF: " + this.getCpf() + " ; Plano: "+ this.getPlano().getNome();
+    }
+
+    @Override
+    public String getInformacoes(){
+        return "---------------------\nNome: "+ this.getNome() +"\nIdade: "+ this.getIdade() + "\nCPF: " + this.getCpf() + "\nPlano: "+ this.getPlano().getNome() + "\n---------------------\n";        
     }
 }

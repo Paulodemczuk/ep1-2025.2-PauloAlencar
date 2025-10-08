@@ -139,5 +139,10 @@ public class Medico extends Pessoa{
         System.out.println("Custo da consulta: "+ this.custoConsulta +" reais");
         System.out.println("----------------------");
     }
+
+    @Override
+    public String toString(){
+        return "Nome: "+ getNome()+" ; Idade: "+getIdade()+" ; CRM: "+getCrm()+" ; Especialidade: "+getEspecialidade()+" ; Custo da consulta: "+getCustoConsulta();
+    }
 }
 
