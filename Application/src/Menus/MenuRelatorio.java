@@ -82,14 +82,19 @@ public class MenuRelatorio {
     }
 
     public void pacientesCadastrados(Scanner sc){
-        System.out.println("\nExibindo pacientes cadastrados...");
+        System.out.println("\nExibindo pacientes cadastrados...\n");
         delay(1);
+        if(pacienteServicos.getPacientes().isEmpty() && pacienteServicos.getPacientesEspeciais().isEmpty()){
+            System.out.println("\nNão existem pacientes cadastrados!");
+        }
         for(Paciente paciente : pacienteServicos.getPacientes()){
             System.out.println(paciente.toString());
+            System.out.println();
             delay(1);
         }
         for(PacienteEspecial paciente : pacienteServicos.getPacientesEspeciais()){
             System.out.println(paciente.toString());
+            System.out.println();
             delay(1);
         }
         System.out.println("\nPressione 0 para voltar.");
@@ -103,8 +108,12 @@ public class MenuRelatorio {
     public void medicosCadastrados(Scanner sc){
         System.out.println("\nExibindo medicos cadastrados...");
         delay(1);
+        if(medicoServicos.getMedicos().isEmpty()){
+            System.out.println("\nNão existem medicos cadastrados!");
+        }
         for(Medico medico : medicoServicos.getMedicos()){
-            medico.printInformacoes();
+            System.out.println(medico.toString());
+            System.out.println();
             delay(1);
         }
         System.out.println("\nPressione 0 para voltar.");
@@ -118,6 +127,9 @@ public class MenuRelatorio {
     public void consultasCadastradas(Scanner sc){
         System.out.println("\nExibindo consultas cadastradas");
         delay(1);
+        if(consultaServicos.getConsultas().isEmpty()){
+            System.out.println("\nNão existem consultas cadastradas!");
+        }
         for(Consulta consulta : consultaServicos.getConsultas()){
             System.out.println(consulta.toString());
             delay(1);
