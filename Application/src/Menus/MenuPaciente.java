@@ -105,7 +105,7 @@ public class MenuPaciente {
             
         }
         else if(pacienteServicos.getPaciente(cpf).getNome().equals("")){
-            System.out.println("\n"+pacienteServicos.getPacienteEspecial(cpf).toString());
+            System.out.println("\n"+pacienteServicos.getPacienteEspecial(cpf).getInformacoes());
             System.out.println();
             System.out.println("Pressione 0 para voltar.");
             int voltar = 1;
@@ -116,7 +116,7 @@ public class MenuPaciente {
             exibirMenuPaciente();
         }
         else{
-            System.out.println("\n"+pacienteServicos.getPaciente(cpf).toString());
+            System.out.println("\n"+pacienteServicos.getPaciente(cpf).getInformacoes());
             System.out.println();
             System.out.println("Pressione 0 para voltar.");
             int voltar = 1;
