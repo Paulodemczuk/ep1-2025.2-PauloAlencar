@@ -10,26 +10,71 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Dados do Aluno
 
-- **Nome completo:** [Preencher aqui]
-- **Matrícula:** [Preencher aqui]
-- **Curso:** [Preencher aqui]
-- **Turma:** [Preencher aqui]
+- **Nome completo:** Paulo Nina Demczuk de Alencar
+- **Matrícula:** 242004920
+- **Curso:** Engenharias
+- **Turma:** 02
 
 ---
 
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
-   [Descrever aqui como compilar o projeto. Exemplo: `javac Main.java` ou o script usado]
+   A partir da pasta raiz do projeto:
+
+   javac -d bin Application/src/Entidades/*.java Application/src/Menus/*.java Application/src/Persistencia/*.java Application/src/Servicos/*.java Application/src/App.java
+
 
 2. **Execução:**  
-   [Descrever aqui como executar o projeto. Exemplo: `java Main` ou o script usado]
+   java -cp bin App
 
 3. **Estrutura de Pastas:**  
-   [Descrever aqui as principais pastas do projeto]
+```
+.
+├──  Application/
+│   └── src/
+│       ├── Entidades/
+│       │   ├── Agenda.java
+│       │   ├── Consulta.java
+│       │   ├── Internacao.java
+│       │   ├── Medico.java
+│       │   ├── Paciente.java
+│       │   ├── PacienteEspecial.java
+│       │   ├── Pessoa.java
+│       │   └── PlanodeSaude.java
+│       │
+│       ├── Menus/
+│       │   ├── Cores.java
+│       │   ├── MenuCadastro.java
+│       │   ├── MenuMedico.java
+│       │   ├── MenuPaciente.java
+│       │   └── MenuRelatorio.java
+│       │
+│       ├── Persistencia/
+│       │   ├── ConsultaPersistencia.java
+│       │   ├── HospitalPersistencia.java
+│       │   ├── InternacaoPersistencia.java
+│       │   ├── MedicosPersistencia.java
+│       │   ├── PacientesEspeciaisPercistencia.java
+│       │   ├── PacientesPersistencia.java
+│       │   └── PlanoPersistencia.java
+│       │
+│       ├── Servicos/
+│       │   ├── ConsultaServicos.java
+│       │   ├── HospitalServicos.java
+│       │   ├── InternacaoServicos.java
+│       │   ├── MedicoServicos.java
+│       │   ├── PacienteServicos.java
+│       │   └── PlanoServicos.java
+│       │
+│       └── App.java
+│
+├── .gitignore
+└── README.md
+```
 
 3. **Versão do JAVA utilizada:**  
-   [Descrever aqui como versão do JAVA utilizada no projeto. Sugestão: `java 21`]
+   java 17.0.12 2024-07-16 LTS
 
 ---
 
@@ -42,13 +87,13 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 ## Prints da Execução
 
 1. Menu Principal:  
-   ![Inserir Print 1](caminho/do/print1.png)
+   <img src="imagens/menuprincipal.png"  width=500px alt="imagem do menu principal do programa" title="Menu Principal">
 
 2. Cadastro de Médico:  
-   ![Inserir Print 2](caminho/do/print2.png)
+   <img src="imagens/cadastromedico.png"  width=500px alt="imagem do programa executando o cadastro de um medico" title="Cadastrando medico">
 
-3. Relatório de ?:  
-   ![Inserir Print 3](caminho/do/print3.png)
+3. Relatório de medicos cadastrados:  
+   <img src="imagens/relatoriomedicos.png"  width=500px alt="imagem do programa executando o relatorio de medicos cadastrados" title="Medicos cadastrados">
 
 ---
 
@@ -56,13 +101,13 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Observações (Extras ou Dificuldades)
 
-- [Espaço para o aluno comentar qualquer funcionalidade extra que implementou, dificuldades enfrentadas, ou considerações importantes.]
+- Encontrar uma forma de gerenciar as agendas foi a minha maior dificuldade com o trabalho.
 
 ---
 
 ## Contato
 
-- [Opcional: E-mail pessoal do aluno.]
+- paulodemczuk@gmail.com
 
 ---
 
