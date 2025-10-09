@@ -216,7 +216,7 @@ public class MenuMedico {
         
         medico = medicoServicos.getMedico(crm);
         boolean retorno = internacaoServicos.cadastrarInternacao(id, paciente, medico, dataEntrada, dataEntrada, quarto, custoInternacao);
-        
+        paciente.adicionarInternacao(internacaoServicos.getInternacao(id));
         if(retorno == false){
             System.out.println("["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O quarto está ocupado");
             delay(1);
