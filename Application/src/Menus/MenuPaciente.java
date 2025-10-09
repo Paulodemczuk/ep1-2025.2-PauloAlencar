@@ -169,30 +169,37 @@ public class MenuPaciente {
         
         medico = medicoServicos.getMedico(crm);
         int retorno = consultaServicos.cadastrarConsulta(id, paciente, medico, local, 0, dataHora);
+        paciente.adicionarConsulta(consultaServicos.getConsulta(id));
         precodaConsulta = consultaServicos.getConsulta(id).valorConsulta();
 
         switch (retorno) {
             //0 se deu tudo certo , 1 se o medico possui consulta marcada para esse horario , 2 se o local ja esta agendado para esse horario, 3 se ambos estao indisponiveis e 4 se medico nao atende nesse horario
     
             case 0:
-                System.out.println("Consulta de id: "+id+ "cadastrada!");
+                System.out.println("Consulta de id: "+id+ " cadastrada!");
                 System.out.println("O valor a pagar é de: "+precodaConsulta);
+                delay(1);
                 break;
             case 1:
                 System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O medico esta indisponivel neste horario");
+                delay(1);
                 break;
             case 2:
                 System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O local esta indisponivel neste horario");
+                delay(1);
                 break;
             case 3:
                 System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O medico e o local estão indisponiveis neste horario");
+                delay(1);
                 break;
             case 4:
                 System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"O medico não atende neste horario");
+                delay(1);
                 break;
         
             default:
                 System.out.println("\n["+Cores.RED+"ERRO"+Cores.RESET+"] "+"Erro ao cadastrar consulta");
+                delay(1);
                 break;
         }
     }
