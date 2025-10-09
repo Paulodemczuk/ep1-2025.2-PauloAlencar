@@ -36,7 +36,7 @@ public class Cores {
     
     public static void delay(int segundos) {
         try {
-            Thread.sleep(segundos * 650);
+            Thread.sleep(segundos * 750);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

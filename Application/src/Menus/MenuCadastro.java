@@ -90,6 +90,7 @@ public class MenuCadastro {
             Paciente paciente = new Paciente(nome, idade, cpf);
             pacienteServicos.addPaciente(paciente);
             System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Paciente adicionado!");
+            delay(1);
             
         }
         else if(possuiPlano == 1){
@@ -103,6 +104,7 @@ public class MenuCadastro {
             PacienteEspecial pacienteEspecial = new PacienteEspecial(planoServicos.getPlanodeSaude(nomePlano), nome, idade, cpf);
             pacienteServicos.addPacienteEspecial(pacienteEspecial);
             System.out.println("\n["+Cores.GREEN+"SUCESSO"+Cores.RESET+"] "+"Paciente especial cadastrado!");
+            delay(1);
             
         }
         else {
